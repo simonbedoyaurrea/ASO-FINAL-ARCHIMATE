@@ -1,0 +1,18 @@
+# Sistema y temporales
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# Credenciales y configuración local
+.env
+.env.*
+!.env.example
+
+# Material fuente privado pendiente de autorización
+/Proyecto_Diseño_Arquitectura_ArchiMate.docx
+
+# Modelos y exportaciones locales deben revisarse manualmente antes de añadirlos
