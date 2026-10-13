@@ -287,6 +287,7 @@ Exportar las vistas PNG desde este modelo y añadir solo archivos reales. No hay
 
 <a id="checklist-de-entrega"></a>
 
+
 ## Checklist de entrega
 
 - [ ] Entrevista documentada y analizada con autorización.
