@@ -30,10 +30,6 @@
 |---|---|
 | [`modelo/recaudo_tema4.archimate`](modelo/recaudo_tema4.archimate) | Modelo ArchiMate único y definitivo (Archi 5.x, ArchiMate 3.2) |
 | [`vistas/`](vistas/) | Las 11 vistas exportadas por Archi en formato SVG |
-| [`entrevista/`](entrevista/) | Conversación, preguntas y análisis de la entrevista |
-| [`docs/final/`](docs/final/) | Documentos completos: [inclusión y exclusión](docs/final/inclusion_exclusion.md), [anticorrupción](docs/final/anticorrupcion.md), [contratos](docs/final/contratos_servicios.md), [dominios](docs/final/dominios.md), [lenguaje ubicuo](docs/final/lenguaje_ubicuo.md), [agregados e invariantes](docs/final/agregados.md), [contextos y patrones](docs/final/contextos.md), [trazabilidad](docs/final/trazabilidad.md), [decisiones y supuestos](docs/final/decisiones_y_supuestos.md) y [validación](docs/final/validacion.md) |
-| [`herramientas/`](herramientas/) | Scripts de generación, exportación y validación |
-| [Enunciado](enunciado/Proyecto_Diseño_Arquitectura_ArchiMate%20(1).docx), [Tema 4](docs/contexto/02_tema4_recaudo.md) y [`diapositivas/`](diapositivas/) | Fuentes académicas utilizadas |
 
 El modelo tiene once vistas, de V1 a V11. La V6 reúne once diagramas independientes, uno por dominio, dentro de una misma vista. Las tablas y especificaciones completas están en `docs/final/`.
 
