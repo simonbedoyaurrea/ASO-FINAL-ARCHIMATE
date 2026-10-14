@@ -2,9 +2,7 @@
 
 **Proyecto:** «Diseño de la arquitectura de una aplicación empresarial con ArchiMate y DDD», Tema 4. Arquitectura de Software, UPB.
 
-> **Modelo único y definitivo:** [`modelo/recaudo_tema4.archimate`](modelo/recaudo_tema4.archimate). Se abre en Archi 5.x; sus once vistas V1–V11 están directamente en la carpeta *Views*, sin subcarpetas.
-> Integra todas las fases: 799 elementos, 1474 relaciones y 11 vistas.
-
+> **Modelo definitivo:** [`modelo/recaudo_tema4.archimate`](modelo/recaudo_tema4.archimate). Se abre en Archi 5.x y contiene once vistas, de V1 a V11.
 
 ## Índice
 
@@ -18,7 +16,7 @@
 7. [Mapa de contextos e interoperabilidad](#7-mapa-de-contextos-e-interoperabilidad) · [V8](#v8-mapa-de-contextos-delimitados) · [V9](#v9-interoperabilidad-y-anticorrupción)
 8. [Bounded Context Canvas](#8-bounded-context-canvas) · [V11](#v11-canvas-del-contexto-tarifas-y-transbordos)
 9. [Trazabilidad vertical](#9-trazabilidad-vertical) · [V10](#v10-de-la-meta-al-componente)
-10. [Decisiones y supuestos](#10-decisiones-y-supuestos)
+10. [Decisiones principales](#10-decisiones-principales)
 11. [Validación, fuentes y limitaciones](#11-validación-fuentes-y-limitaciones)
 12. [Tabla de aportes](#12-tabla-de-aportes)
 
@@ -32,15 +30,12 @@
 |---|---|
 | [`modelo/recaudo_tema4.archimate`](modelo/recaudo_tema4.archimate) | Modelo ArchiMate único y definitivo (Archi 5.x, ArchiMate 3.2) |
 | [`vistas/`](vistas/) | Las 11 vistas exportadas por Archi en formato SVG |
-| [`entrevista/`](entrevista/) | [Conversación íntegra](entrevista/conversacion_fase0_completa.txt), [instrucción de rol](entrevista/instruccion_de_rol.md), [guion](entrevista/guion.md), [análisis de hallazgos](entrevista/analisis_hallazgos.md), [índice de referencias](entrevista/indice_referencias.md) y el Word original con capturas |
+| [`entrevista/`](entrevista/) | Conversación, preguntas y análisis de la entrevista |
 | [`docs/final/`](docs/final/) | Documentos completos: [inclusión y exclusión](docs/final/inclusion_exclusion.md), [anticorrupción](docs/final/anticorrupcion.md), [contratos](docs/final/contratos_servicios.md), [dominios](docs/final/dominios.md), [lenguaje ubicuo](docs/final/lenguaje_ubicuo.md), [agregados e invariantes](docs/final/agregados.md), [contextos y patrones](docs/final/contextos.md), [trazabilidad](docs/final/trazabilidad.md), [decisiones y supuestos](docs/final/decisiones_y_supuestos.md) y [validación](docs/final/validacion.md) |
-| [`herramientas/`](herramientas/) | Catálogo de datos y scripts que generan el modelo, las tablas y los contratos, exportan las vistas y validan el modelo (ver §11) |
-| [Enunciado](enunciado/Proyecto_Diseño_Arquitectura_ArchiMate%20(1).docx), [resumen del enunciado](docs/contexto/01_enunciado.md), [Tema 4 literal](docs/contexto/02_tema4_recaudo.md), [`diapositivas/`](diapositivas/), [mapa antecedente](mapa_capacidades_recaudo.pdf) y [Word de evidencia de la entrevista](entrevista/capturas_y_tabla_del_equipo_El_pago_integrado_se_divide_por_reglas.docx) | Fuentes académicas, evidencia y antecedentes disponibles en esta copia |
-| `fase 1/`, `fase 2/`, `docs/fase0`, `docs/fase1` | Antecedentes de trabajo anteriores (sin cambios) |
+| [`herramientas/`](herramientas/) | Scripts de generación, exportación y validación |
+| [Enunciado](enunciado/Proyecto_Diseño_Arquitectura_ArchiMate%20(1).docx), [Tema 4](docs/contexto/02_tema4_recaudo.md) y [`diapositivas/`](diapositivas/) | Fuentes académicas utilizadas |
 
-**Cómo se citan las fuentes:** «T4» es el Tema 4 del enunciado. «B3.1» es el bloque 3, sección 1 de la entrevista, y cada referencia indica sus líneas en la conversación (por ejemplo, «Entrevista B3.1 (l. 198-210)»). «D-04» y «S-03» son decisiones y supuestos de [decisiones_y_supuestos.md](docs/final/decisiones_y_supuestos.md). Los elementos que representan hechos, supuestos o decisiones documentan su procedencia en la propiedad «Fuente»; los elementos puramente estructurales o de diagramación pueden no llevarla.
-
-**Organización de las vistas (D-30).** El modelo tiene **exactamente once vistas, V1 a V11**, directamente en la carpeta *Views* de Archi y en ese orden. La V6 es una sola vista con **un diagrama independiente por dominio**: once bloques titulados, que se pueden mover y ampliar por separado y de los que no sale ninguna línea. El enunciado pide «un diagrama por dominio», no una vista por dominio. Las tablas, las especificaciones completas y los ejemplos están en `docs/final/`.
+El modelo tiene once vistas, de V1 a V11. La V6 reúne once diagramas independientes, uno por dominio, dentro de una misma vista. Las tablas y especificaciones completas están en `docs/final/`.
 
 | Vista | Qué muestra |
 |---|---|
@@ -52,22 +47,9 @@
 | V6 Agregados | Once diagramas, uno por dominio, con raíz, límite, comandos, eventos, políticas e invariantes |
 | V7 Lenguaje ubicuo | El glosario por contexto, con definición y ejemplo, y las palabras con varios significados |
 | V8 Mapa de contextos | Los contextos con su responsabilidad, su API y sus servicios, y los patrones de relación |
-| V9 Interoperabilidad | Cada intercambio externo con su dirección, la interfaz, el traductor, el servicio anticorrupción de la Fase 2 y su contrato |
+| V9 Interoperabilidad | Cada intercambio externo con su dirección, la interfaz, el traductor y su contrato |
 | V10 Trazabilidad | De la meta al componente, con relaciones visibles, para los 11 contextos |
 | V11 Canvas | El contexto principal, Tarifas y transbordos |
-
-**Recorrido sugerido para la sustentación (30 minutos):**
-1. V1 y V2: por qué existe la aplicación, qué debe cumplir y dónde actúa (5 min).
-2. V3: el proceso, sus dos recorridos y dónde está la aplicación (4 min).
-3. V4: las capas, lo que entra y lo que no, los contratos y quién presta los servicios (5 min).
-4. V5 y V7: dominios y lenguaje (4 min).
-5. V6: los dos diagramas de los dominios centrales; los otros se amplían si lo preguntan (4 min).
-6. V8, V9 y V11: contextos, intercambios externos y canvas (6 min).
-7. V10: trazabilidad de la meta al componente (2 min).
-
-**Nombres en lenguaje cotidiano.** Las cajas y los textos de las vistas usan palabras sencillas («cuadrar la plata» en vez de «conciliar», «tarjeta del banco» en vez de «tarjeta bancaria de pago abierto»). El nombre técnico anterior de cada elemento no se perdió: está en su propiedad «Nombre técnico» dentro del modelo. Quedan con su redacción original los textos que vienen literalmente del Tema 4 (GOL01 y REQ01 a REQ05), los términos del glosario, porque son las palabras del negocio y deben ser las mismas en todo el modelo, y los conceptos del curso (agregado, contexto, dominio, capas de servicio, Contract First, canvas), que en cada vista van acompañados de una explicación corta.
-
-**Frontera de la aplicación (D-01, D-04, D-05, D-06).** La aplicación es la plataforma central de recaudo del ente gestor. **Dentro:** medios VAMOS, perfiles, reglas tarifarias, recepción y recálculo de transacciones, cobro agrupado al pasajero con tarjeta bancaria y consolidación por día de servicio, modo, ruta y operador. **Fuera:** el hardware, la conectividad y el monitoreo de validadores y lectores; la conciliación financiera; la liquidación contractual a operadores; la orden y ejecución del pago a operadores; contabilidad, PQRS, analítica, fraude y efectivo. La aplicación intercambia con los sistemas de los equipos transacciones y confirmaciones de entrada, y parámetros, listas y operaciones pendientes de salida, sin administrar los dispositivos. Entrega al proceso externo una base consolidada sin conciliar; allí se concilia con el dinero, se liquida según contratos y la fiduciaria ejecuta los pagos. El cobro agrupado al pasajero sí permanece dentro del alcance.
 
 ---
 
@@ -82,13 +64,10 @@
 
 Los dispositivos quedan fuera.
 
-**Entrevista (Fase 0).** El equipo configuró un experto simulado con una [instrucción de rol](entrevista/instruccion_de_rol.md) que le prohíbe proponer diseño y le exige marcar cada afirmación como [Norma], [Práctica] o [Supuesto] con su nivel de certeza. La [conversación íntegra](entrevista/conversacion_fase0_completa.txt) tiene diez bloques temáticos (B1-B10), incluido un bloque específico de interoperabilidad (B9). Las preguntas enviadas están en el [guion](entrevista/guion.md), con su redacción literal.
-
-El [análisis de hallazgos](entrevista/analisis_hallazgos.md) clasifica 44 hallazgos en aceptados, aceptados como supuesto configurable, contrastados o descartados, e indica en qué parte del diseño influye cada uno. Algunos resultados de ese análisis:
+La entrevista amplió la información del enunciado sobre la operación diaria, las reglas tarifarias, los reclamos, los intercambios con otros sistemas y la distribución del recaudo. El análisis completo se conserva en la carpeta `entrevista/`. Los principales resultados fueron:
 - Las normas que el diseño usa como restricción se contrastaron con su texto publicado: Ley 1581 de 2012 y Ley 1755 de 2015. Las demás no se usan como reglas.
 - Los umbrales de indicadores se descartaron porque el experto dijo que no son estándar.
-- La fila 10 de la tabla del equipo («transbordo solo con VAMOS») se corrigió con la entrevista (D-10).
-- Los turnos finales de la conversación, en los que se pidió al asistente generar un mapa y modelos, **no** se usan como hallazgos.
+- La integración tarifaria también se aplica cuando el pasajero paga con tarjeta bancaria.
 
 ---
 
@@ -99,20 +78,13 @@ El [análisis de hallazgos](entrevista/analisis_hallazgos.md) clasifica 44 halla
 
 [Abrir V1 en SVG](vistas/V1%20%C2%B7%20Motivacio%CC%81n%3A%20de%20los%20interesados%20a%20los%20requerimientos.svg)
 
-**Análisis.** Una sola vista recorre toda la motivación, de izquierda a derecha:
-- **Interesados (B1.1) e impulsores (B1.2).**
-- **Evaluaciones:** los diagnósticos del experto, como «sin caja no hay operación» o los reclamos frecuentes y su causa.
-- **Metas:** son cuatro. GOL01 viene literal del Tema 4; GOL02 es lo que busca la gerencia (B1.4); GOL03 sale del requisito de verificar perfiles, y GOL04 responde a las necesidades del usuario.
-- **Resultados y cursos de acción:** a la derecha de cada meta. Cada resultado dice en su propiedad «Indicador» cómo se mide (B7.2), sin umbrales, porque el experto aclaró que los suyos no son estándar (B7.3). Cada curso de acción va con las capacidades que lo hacen posible. COA02, «centralizar en el ente gestor las reglas… y recibir las transacciones», es la decisión de frontera D-01 expresada como estrategia.
-- **Requerimientos:** a la derecha de cada resultado.
-  - REQ01 a REQ05 son el alcance literal del Tema 4; REQ03 nombra los cuatro perfiles especiales (D-29).
-  - REQ06 a REQ12 se **derivan** de lo que dijo el experto, porque la entrevista no preguntó requerimientos de forma directa. Cubren idempotencia y día de servicio, ajustes con huella, doble control, tokenización, continuidad temporal ante pérdida de conectividad con la última configuración local, evidencia de perfiles y avisos al usuario (REQ12, B9.12).
-- **Principios y restricciones:** en la última columna, influyendo (+ y −) sobre cada requerimiento.
-  - Los principios son las «reglas de oro» del experto (B1.6).
-  - Las restricciones son lo que no se puede cambiar (B1.5), la exclusión de dispositivos (T4) y las dos leyes contrastadas.
-  - Dos principios quedan sin línea a propósito, la separación de dineros y la doble verificación con el banco: aplican a la conciliación y al pago, que están fuera (D-04).
+**Análisis.** La vista se lee de izquierda a derecha. Empieza con las personas y organizaciones interesadas en el sistema, sigue con los problemas que impulsan el proyecto y termina con las metas y los requerimientos de la aplicación. Entre ellos aparecen los resultados esperados y las acciones necesarias para alcanzarlos.
 
-**Argumentación.** Se sigue el patrón de 6_TOGAF diap. 41:
+El modelo plantea cuatro metas: asegurar la tarifa correcta, mantener el control del recaudo, verificar los beneficios de los perfiles especiales y facilitar el viaje del pasajero. Los cinco primeros requerimientos vienen directamente del enunciado. Los demás surgieron de la entrevista y cubren asuntos necesarios para operar el sistema, como evitar transacciones duplicadas, registrar los ajustes, proteger los datos bancarios, continuar temporalmente ante una pérdida de conectividad y avisar al usuario sobre el resultado de sus operaciones.
+
+La última columna muestra los principios y las restricciones que condicionan esos requerimientos. Allí aparecen, entre otros, la protección de datos personales, la atención de solicitudes de los usuarios y la exclusión de los dispositivos físicos del alcance de la aplicación.
+
+**Argumentación.** Se sigue el patrón presentado en la diapositiva 41 de la clase de TOGAF:
 - la evaluación influye en la meta;
 - el resultado y el curso de acción realizan la meta;
 - el requerimiento realiza el resultado;
@@ -136,7 +108,7 @@ Juntar todo en una vista muestra la cadena completa de la motivación que pide e
 
 Los **recursos** (café claro) van dentro de la capacidad a la que se asignan; ArchiMate permite mostrar la asignación por anidamiento (6_TOGAF diap. 27). Los **cursos de acción** están en la V1, junto a la meta que realizan y a las capacidades que los hacen posibles.
 
-**Argumentación.** El mapa es del **negocio completo** (D-15). Por eso incluye capacidades sin impacto, como la operación de cada modo, el efectivo, la parte jurídica, talento humano e infraestructura. Así se evita el nivel «mapa centrado solo en la aplicación».
+**Argumentación.** El mapa representa el negocio completo, no solo la aplicación. Por eso incluye capacidades que el software no realiza, como la operación de cada modo de transporte, el manejo de efectivo, la gestión jurídica, el talento humano y la infraestructura.
 - **Las capacidades no se conectan entre sí:** no son pasos de un proceso.
 - **Dónde actúa la aplicación:** se ve por el borde. La relación «la aplicación realiza la capacidad» está en el modelo y se recorre en la V10.
 
@@ -150,9 +122,9 @@ Los **recursos** (café claro) van dentro de la capacidad a la que se asignan; A
 - **En el medio, el proceso:** cada paso está en el carril de quien lo hace.
 - **Debajo de cada paso apoyado, el servicio de la aplicación (cian) que le sirve.** Así se ve dónde se ubica la aplicación:
   - Hace la venta y la recarga, la tarificación, el cobro agrupado y la consolidación.
-  - A los equipos les entrega las versiones de tarifas, perfiles, reglas de integración, listas de bloqueo y calendario que necesitan para validar localmente (D-05).
-  - Al sistema externo de conciliación y liquidación le entrega la base consolidada sin conciliar (D-04, D-25).
-  - A la contabilidad le envía el resumen por el traductor SA07 (D-08).
+  - Entrega a los equipos las tarifas, perfiles, reglas de integración, listas de bloqueo y calendarios que necesitan para validar localmente.
+  - Entrega al sistema de conciliación y liquidación una base consolidada que todavía no ha sido comparada con el dinero recibido.
+  - Envía a contabilidad un resumen por medio de una interfaz de integración.
   - Los pasos grises están fuera de la aplicación.
 - **El registro de la tarifa vigente** (área de recaudo del ente gestor) también está en la V3, porque realiza la primera etapa. Los trámites de tarjeta y perfil y la atención de reclamos son procesos de soporte que no ocurren en cada viaje; están en el modelo y sirven a la V4.
 
@@ -163,7 +135,7 @@ Los **recursos** (café claro) van dentro de la capacidad a la que se asignan; A
   - Con tarjeta: ¿saldo suficiente?
     - Saldo insuficiente: recarga.
     - **Saldo suficiente: valida directamente**, sin recargar.
-- **La tarifa (D-05):** la autoridad autoriza las tarifas y descuentos. El ente gestor registra, versiona y publica sus reglas. En el acceso, el equipo calcula y aplica localmente la tarifa con la versión vigente; ante una pérdida de conectividad puede continuar temporalmente con la última configuración y sincronizar después. Al recibir la transacción, la aplicación central recalcula la tarifa correcta según versión, perfil e integración, compara el resultado con lo aplicado por el equipo y registra las diferencias. Para tarjeta bancaria, ese cálculo central determina el valor que entra al cobro agrupado.
+- **La tarifa:** la autoridad autoriza las tarifas y descuentos. El ente gestor registra, versiona y publica las reglas. En el acceso, el equipo calcula y aplica la tarifa con la versión vigente. Si pierde la conexión, puede trabajar temporalmente con la última configuración y sincronizar después. Cuando la aplicación central recibe la transacción, vuelve a calcular la tarifa según la versión, el perfil y las reglas de integración. Después compara ambos resultados y registra cualquier diferencia. En los pagos con tarjeta bancaria, este cálculo define el valor que se cobrará.
 - **La consolidación:** el consumo se atribuye por día de servicio, modo, ruta y operador. Las recargas y los resultados de cobro bancario se conservan como líneas de control separadas y no se suman al consumo ni a la base de distribución.
 
 **Argumentación.** Para que la aplicación cupiera en la misma vista sin cruzar líneas, la pregunta del VAMOS se dividió en dos bifurcaciones, ¿tiene tarjeta? y ¿saldo suficiente?, que es además la lógica real del recorrido. Los servicios de la aplicación van justo debajo del paso al que sirven, con la relación «sirve a» de servicio de aplicación a proceso de negocio (6_TOGAF diap. 44).
@@ -180,23 +152,23 @@ Hay seis capas de servicio reales (7_SOA diap. 20 y 28); el proceso E2E está en
 [Abrir V4 en SVG](vistas/V4%20%C2%B7%20Descomposicio%CC%81n%20de%20servicios%3A%20seis%20capas%2C%20alcance%20y%20contratos.svg)
 
 **Análisis.**
-- **Izquierda, el árbol de servicios:** pasos del proceso → capa 1 (plataforma) → capa 2 (dominio) → **contrato** de cada servicio de dominio (Contract First, D-13).
-- **Derecha, quién presta los servicios:** el ente gestor asigna los roles; cada rol responde por funciones; cada función realiza servicios de dominio y usa información del negocio (acceso). El *Perfil especial* se divide en los **cuatro perfiles del Tema 4** (D-29).
+- **Izquierda, el árbol de servicios:** los pasos del proceso se descomponen primero en servicios de plataforma y después en servicios de dominio. Cada servicio de dominio tiene un contrato que define cómo se usa.
+- **Derecha, quién presta los servicios:** el ente gestor asigna los roles; cada rol responde por funciones y cada función utiliza la información necesaria. Los perfiles especiales se dividen en cuatro tipos: estudiante, adulto mayor, persona con discapacidad y beneficiario de subsidio.
 - **Debajo, completas, las capas 3 a 6:**
   - Capa 3: servicios básicos, cada uno en el recuadro del servicio de dominio al que sirve.
   - Capa 4: traductores hacia afuera; sus intercambios con dirección están en la V9.
   - Capa 5: datos maestros.
   - Capa 6: servicios comunes.
-- **Excluidos:** van en gris (D-12): conciliación financiera, liquidación y pago a operadores (D-04), contabilidad (D-08), PQRS (D-07), analítica, dispositivos (D-06), efectivo y comisiones, y fraude. El cobro agrupado al pasajero con tarjeta bancaria sí está incluido.
+- **Fuera del alcance:** los elementos grises corresponden a la conciliación financiera, la liquidación y el pago a operadores, la contabilidad, la atención de peticiones y reclamos, la analítica, los dispositivos, el efectivo, las comisiones y la gestión del fraude. El cobro agrupado al pasajero con tarjeta bancaria sí forma parte de la aplicación.
 
-**Argumentación.** Son seis capas reales (7_SOA diap. 20 y 28); el proceso E2E está encima y no se cuenta como capa. El tamaño de cada servicio sigue las preguntas de 7_SOA diap. 33: quién es responsable y quién gestiona los datos. Por ejemplo, el saldo pertenece a SD4 y la transacción a SD5.
+**Argumentación.** La estructura sigue las seis capas presentadas en las diapositivas 20 y 28 de la clase de SOA. El proceso completo aparece encima y no se cuenta como una capa adicional. La responsabilidad sobre los datos ayuda a separar los servicios: el contexto de Tarjetas VAMOS administra el saldo, mientras que Recepción de transacciones administra cada validación recibida.
 
-**Contract First.** Cada servicio incluido tiene su objeto *contract*, en total 74; ArchiMate 3.2 solo permite asociación entre contrato y servicio. La V4 muestra los contratos de dominio y la V9 los de la capa anticorrupción. Todos están en el modelo y su especificación completa en [contratos_servicios.md](docs/final/contratos_servicios.md):
+**Contratos de servicio.** Cada servicio incluido tiene un contrato. La V4 muestra los contratos de los servicios del negocio y la V9 muestra los contratos de integración con sistemas externos. La especificación completa está en [contratos_servicios.md](docs/final/contratos_servicios.md) e incluye:
 - operación, entrada y salida;
 - precondiciones y postcondiciones (9_DDD diap. 39);
 - reglas y errores;
 - requisitos no funcionales;
-- **formato y protocolo** (D-24);
+- formato y protocolo;
 - versión (7_SOA diap. 44-47).
 
 La justificación de cada inclusión y exclusión está en la [tabla de inclusión y exclusión](docs/final/inclusion_exclusion.md): 84 servicios, de los que 74 entran y 10 no.
@@ -205,8 +177,8 @@ La justificación de cada inclusión y exclusión está en la [tabla de inclusi�
 
 ## 5. Dominios y lenguaje ubicuo
 
-A partir de aquí el diseño pasa a la capa de aplicación. **Cómo se extrajeron los dominios** (9_DDD diap. 8-10):
-1. Estructura de la organización (B2.1, B4.2).
+A partir de aquí el diseño pasa a la capa de aplicación. Los dominios se identificaron a partir de tres fuentes:
+1. La estructura de la organización y las responsabilidades descritas en la entrevista.
 2. Proceso detallado con sus eventos (los de la V6).
 3. Puntos de corte donde cambia el dueño del dato. Por ejemplo, la transacción la acepta Recepción de transacciones, le calcula la tarifa Tarifas y transbordos y la asigna a su ruta y operador Consolidación.
 
@@ -217,10 +189,10 @@ La tabla de eventos por dominio y los argumentos completos están en [dominios.m
 
 [Abrir V5 en SVG](vistas/V5%20%C2%B7%20Dominios%20y%20su%20clasificaci%C3%B3n.svg)
 
-**Análisis y argumentación (9_DDD diap. 11).** Cada dominio muestra sus objetos de negocio y el contexto que lo implementa.
+**Análisis y argumentación.** Cada dominio muestra sus objetos de negocio y el contexto que lo implementa. La clasificación sigue el criterio presentado en la clase de DDD:
 - **Centrales:**
-  - *Tarifas y transbordos*: es el diferenciador que pide el Tema 4. Tiene las reglas más variables y sus errores causan los reclamos más frecuentes (B3.6, B6.1, B6.3).
-  - *Consolidación del recaudo*: sostiene la meta «cada peso llega a quien corresponde» y es la base de la distribución. Las disputas con los operadores son por conteo y atribución (B1.1, B3.6).
+  - *Tarifas y transbordos*: concentra las reglas más variables del sistema. Sus errores también están entre las causas más frecuentes de reclamos.
+  - *Consolidación del recaudo*: permite saber cuánto consumo corresponde a cada modo, ruta y operador. Esta información sirve como base para la distribución posterior de los ingresos.
 - **De soporte:** tarjetas VAMOS y saldos, perfiles y descuentos, pago con tarjeta del banco, recepción de transacciones, ajustes y reclamos, y rutas y calendario. El pago con tarjeta es de soporte y no central, aunque es complejo, porque aplica una práctica del sector (el cobro agrupado) y la decisión de cuánto cobrar la toma Tarifas y transbordos.
 - **Genéricos:** usuarios internos y permisos, avisos y auditoría.
 
@@ -231,11 +203,7 @@ Cada dominio tiene responsable, datos y reglas propios; los dominios genéricos 
 
 [Abrir V7 en SVG](vistas/V7%20%C2%B7%20Lenguaje%20ubicuo%3A%20glosario%20por%20contexto%20y%20palabras%20con%20varios%20significados.svg)
 
-**Análisis.** Arriba está el glosario. Cada tarjeta tiene el término (*representation*), el objeto de negocio que nombra (realización) y su definición (*meaning*); el recuadro indica el contexto donde vale (D-20). Las definiciones precisan:
-- «Cobro agrupado»: al cierre del día **o** al superar un umbral (D-11).
-- «Reposición»: qué saldo se traslada y cuándo (D-28).
-- «Base de distribución»: es consolidada, no conciliada (D-25).
-- «Perfil especial»: los cuatro tipos (D-29).
+**Análisis.** En la parte superior está el glosario. Cada tarjeta relaciona un término con el objeto del negocio que representa, su definición y el contexto en el que se usa. Allí se aclara que el cobro con tarjeta bancaria puede ejecutarse al superar un umbral o al cerrar el día; que la reposición de una tarjeta traslada el saldo conocido cuando el bloqueo se hace efectivo; que la base de distribución todavía no está conciliada; y que existen cuatro tipos de perfil especial.
 
 Abajo están los términos que **cambian de significado** según quién los use. Cada término se asocia a sus significados y cada significado al contexto o a la parte externa donde vale:
 - «Operador»: operador de transporte, concesionario o uso amplio.
@@ -243,7 +211,7 @@ Abajo están los términos que **cambian de significado** según quién los use.
 - «Saldo»: saldo conocido, saldo en la tarjeta o pasivo contable.
 - «Tarifa»: correcta, aplicada o técnica.
 - «Recaudado» y «Cobro».
-- «Base»: la base **consolidada** que entrega la aplicación frente a la base **conciliada** que produce la conciliación (D-25).
+- «Base»: puede ser la base consolidada que entrega la aplicación o la base conciliada que se obtiene después de compararla con el dinero recibido.
 
 El glosario completo, con definición, contexto, ejemplo y fuente, está en [lenguaje_ubicuo.md](docs/final/lenguaje_ubicuo.md). Los nombres de los elementos de todas las vistas usan estos términos.
 
@@ -263,14 +231,14 @@ El glosario completo, con definición, contexto, ejemplo y fuente, está en [len
 - debajo, sus **invariantes**.
 
 **Reglas destacadas del diseño:**
-- **Cobro agrupado (V6, D-11).** Antes decía «un solo cobro por día», lo que contradecía el umbral que describió el experto (B3.3). Ahora:
+- **Cobro agrupado.** Los viajes pagados con una misma tarjeta bancaria se acumulan antes de solicitar el cobro:
   - cada viaje entra en un solo cargo;
   - hay un cargo al cierre del día o antes si se supera el umbral, hasta un máximo configurado;
   - la suma del día no pasa el tope si se configura;
   - un abordaje posterior a un cargo conserva el transbordo de su viaje.
-- **Consolidado (V6, D-26 y D-25).** Las recargas, el consumo y los resultados de cobro bancario van en líneas separadas que no se suman. La base de distribución se calcula solo desde el consumo atribuido; la conciliación externa devuelve sus diferencias como propuestas de ajuste.
-- **Tarjeta VAMOS (V6, D-28).** El saldo de la reposición es el saldo conocido a la hora del bloqueo efectivo, calculado cuando cerraron esos días.
-- **Perfil especial (V6, D-29).** El tipo es uno de los cuatro del Tema 4 y cada uno exige su certificación.
+- **Consolidado.** Las recargas, el consumo y los resultados de cobro bancario se mantienen en líneas separadas. La base de distribución se calcula únicamente con el consumo atribuido. Si la conciliación posterior encuentra diferencias, estas regresan como propuestas de ajuste.
+- **Tarjeta VAMOS.** Cuando se repone una tarjeta bloqueada, se traslada el saldo conocido en el momento en que el bloqueo se hizo efectivo.
+- **Perfil especial.** Cada perfil corresponde a uno de los cuatro tipos definidos en el enunciado y requiere su certificación.
 - **Políticas entre agregados.**
   - El movimiento de saldo lo dispara el abordaje tarificado (relación Tarifas → Tarjetas), y no la transacción aceptada, porque entre Recepción y Tarjetas no hay relación en el mapa de contextos.
   - Las transacciones tardías también se tarifan.
@@ -282,7 +250,7 @@ El glosario completo, con definición, contexto, ejemplo y fuente, está en [len
 - Cada transacción es su propio agregado, para recibir millones al día sin bloqueos.
 - El consolidado del día de servicio es la unidad de cierre diario.
 
-El detalle está en [agregados.md](docs/final/agregados.md). **Notación (D-19):** agrupación por agregado, objetos de datos para la raíz, las entidades y los objetos de valor, procesos de aplicación para los comandos y eventos de aplicación para los eventos (9_DDD diap. 18-23).
+El detalle está en [agregados.md](docs/final/agregados.md). La notación sigue las diapositivas 18 a 23 de la clase de DDD: cada agregado aparece como una agrupación, los datos representan la raíz y sus elementos, los procesos representan comandos y los eventos de aplicación representan hechos que ya ocurrieron.
 
 ---
 
@@ -293,16 +261,16 @@ El detalle está en [agregados.md](docs/final/agregados.md). **Notación (D-19):
 
 [Abrir V8 en SVG](vistas/V8%20%C2%B7%20Mapa%20de%20contextos%20delimitados.svg)
 
-**Análisis.** Hay un contexto delimitado por dominio, modelado como componente de aplicación con su **responsabilidad** (la nota de arriba), su interfaz y sus servicios (D-17, 9_DDD diap. 25-27). Los patrones son:
-- **[C/P] Cliente-proveedor:** entre los contextos centrales y los de soporte, como flujo del proveedor al consumidor. Por ejemplo:
+**Análisis.** Hay un contexto delimitado por dominio. Cada uno muestra su responsabilidad, su interfaz y los servicios que ofrece. Las relaciones principales son:
+- **Cliente y proveedor:** un contexto entrega información que otro necesita. Por ejemplo:
   - Recepción → Tarifas, con la transacción aceptada.
   - Tarifas → Consolidación, con el abordaje con su tarifa.
-  - Tarjetas → Consolidación, con las recargas **aparte del consumo** (D-26).
-- **[OHS/PL] Servicio abierto con lenguaje publicado:** desde Rutas y calendario.
-- **[CF] Conformista:** hacia Usuarios internos y permisos.
-- **[OHS] Servicio abierto:** Avisos **sirve a** Pago con tarjeta del banco y a Perfiles. Es una relación «servida por» y no un flujo, porque son ellos los que le piden el envío cuando ocurre su evento (D-27).
+  - Tarjetas → Consolidación, con las recargas separadas del consumo.
+- **Servicio abierto con lenguaje publicado:** Rutas y calendario publica una interfaz estable para los demás contextos.
+- **Conformista:** Usuarios internos y permisos ofrece un modelo que los consumidores adoptan sin traducirlo.
+- **Servicio abierto:** Pago con tarjeta del banco y Perfiles solicitan a Avisos el envío de mensajes cuando ocurre un evento relevante.
 - **Núcleo compartido:** limitado a los identificadores (número de tarjeta, token, transacción y día de servicio).
-- **Auditoría:** es transversal para operaciones sensibles y correctivas. La vista omite sus relaciones para conservar la legibilidad; la cobertura exacta se especifica mediante SI2 y los contratos, por lo que no debe interpretarse que toda consulta genera el mismo tipo de registro.
+- **Auditoría:** es transversal para las operaciones sensibles y correctivas. La vista omite algunas relaciones para conservar la legibilidad. Los contratos indican cuáles operaciones deben dejar registro, por lo que no toda consulta genera el mismo tipo de evidencia.
 
 Las responsabilidades de cada relación están en [contextos.md](docs/final/contextos.md).
 
@@ -311,22 +279,22 @@ Las responsabilidades de cada relación están en [contextos.md](docs/final/cont
 
 [Abrir V9 en SVG](vistas/V9%20%C2%B7%20Interoperabilidad%20y%20anticorrupci%C3%B3n.svg)
 
-**Análisis.** Es la capa anticorrupción completa. Para cada servicio externo, de SA01 a SA15, la vista muestra:
+**Análisis.** Esta vista muestra cómo se integra la aplicación con sistemas externos. Para cada integración se presenta:
 - el componente externo y cada flujo con nombre y dirección explícitos; cuando existe intercambio en ambos sentidos se modela con relaciones separadas;
 - la interfaz anticorrupción, dentro del contexto dueño y asignada a su traductor;
-- el **servicio anticorrupción de la Fase 2** que ese traductor realiza, con su **contrato**;
+- el servicio de integración que realiza el traductor, junto con su contrato;
 - el patrón de relación.
 
-Cada fila enlaza el sistema externo, la interfaz del contexto dueño, el traductor, el servicio anticorrupción de Fase 2, su contrato y el patrón. La tabla de [anticorrupción](docs/final/anticorrupcion.md) documenta 35 flujos dirigidos correspondientes a los 15 servicios SA01–SA15.
+Cada fila enlaza el sistema externo, la interfaz del contexto responsable, el traductor, el servicio, su contrato y el tipo de relación. La tabla de [anticorrupción](docs/final/anticorrupcion.md) contiene el detalle de los 35 intercambios representados.
 
-En SA08 sale la base consolidada **sin conciliar**. Regresan por flujos separados las diferencias monetarias encontradas por la conciliación y las novedades de atribución que deben corregirse. Fuera de la aplicación, la secuencia es conciliar, liquidar y ordenar o ejecutar el pago a operadores (D-04, D-25, S-09).
+La aplicación entrega una base consolidada que todavía no ha sido conciliada. El sistema externo devuelve por separado las diferencias monetarias y los cambios que afectan la asignación a cada operador. La conciliación, la liquidación y el pago a operadores se realizan fuera de esta aplicación.
 
-**Argumentación.** El patrón depende de quién manda en el formato, y es coherente con la Fase 2:
+**Argumentación.** El tipo de integración depende de quién define el formato:
 - **Capa anticorrupción:** para los formatos propietarios de los equipos, la red, las certificadoras y el sistema legado.
 - **Conformista:** con la autoridad, el adquirente y la pasarela.
 - **Lenguaje publicado:** hacia el área financiera, la liquidación y los operadores.
 
-El formato y el protocolo de cada intercambio están en su contrato (D-24).
+El contrato de cada intercambio especifica su formato y su protocolo.
 
 ---
 
@@ -342,7 +310,7 @@ El formato y el protocolo de cada intercambio están en su contrato (D-24).
 - Comunicación entrante y saliente: colaborador y mensaje, con su tipo.
 - Lenguaje ubicuo, decisiones de negocio, supuestos, métricas de verificación y preguntas abiertas.
 
-**Argumentación.** Se eligió este contexto porque es central, concentra las reglas que pide el Tema 4 y tiene más comunicación entrante y saliente (D-18). Para construirlo en Archi (D-22), las secciones son agrupaciones y se reutilizan elementos del modelo: el componente, los eventos y comandos de la V6, los términos de la V7 y los colaboradores de la V8 y la V9. El propósito, la clasificación, los roles y las métricas son *meaning*; las decisiones son *constraint*, y los supuestos y las preguntas son *assessment*.
+**Argumentación.** Se eligió Tarifas y transbordos porque es uno de los contextos centrales, concentra las reglas tarifarias del enunciado y se comunica con varios contextos internos y sistemas externos. El canvas reutiliza los comandos y eventos de la V6, los términos de la V7 y los colaboradores de las vistas V8 y V9. De esta manera, la información del canvas se puede rastrear hasta las demás partes del modelo.
 
 ---
 
@@ -355,22 +323,4 @@ El formato y el protocolo de cada intercambio están en su contrato (D-24).
 
 **Análisis.** La cadena es meta ← resultado ← requerimiento ← capacidad ← servicio de negocio ← servicio de aplicación ← contexto delimitado. Todas son relaciones de realización visibles y cada columna solo se conecta con la siguiente. Una sola vista cubre los doce requerimientos y **los once contextos**.
 
-Los once contextos principales llegan a una meta. Rutas y calendario participa en recepción y consolidación; Avisos llega por REQ12; Auditoría y soportes llega por REQ07 y REQ11. Los componentes externos y los adaptadores ACL de V9 no son realizadores directos de metas internas y por eso no aparecen como destino final de esta vista.
-
-La matriz completa está en [trazabilidad.md](docs/final/trazabilidad.md). El validador comprueba que **cada** contexto llega a una meta.
-
----
-
-## 10. Decisiones y supuestos
-
-El registro completo está en [decisiones_y_supuestos.md](docs/final/decisiones_y_supuestos.md): 30 decisiones (D-01 a D-30), 12 supuestos y los parámetros sin valor. Las decisiones que más cambian el diseño son:
-
-| Código | Decisión | Por qué |
-|---|---|---|
-| D-01 | La aplicación es la plataforma de recaudo del ente gestor; los equipos los conserva su proveedor | El Tema 4 pide las funciones del sistema central y dice que el software «recibe las transacciones» |
-| D-04 | La conciliación financiera, la liquidación contractual y el pago a operadores quedan fuera; la aplicación entrega la base consolidada | Tema 4: consolidación «como base para». La aplicación consolida; el sistema externo concilia y liquida, y la fiduciaria ejecuta el pago (B3.1, B3.5, B2.7). El cobro bancario al pasajero sí está incluido. |
-| D-05 | La autoridad autoriza; el ente gestor registra, versiona y publica; el equipo calcula y aplica localmente; la aplicación central recalcula, compara y registra diferencias | Distingue la validación inmediata, incluida la contingencia temporal sin conectividad, de la verificación central exigida por el Tema 4 (B4.4, B9.13). |
-| D-02 | El metro es un modo integrado con su propia ACL | El Tema 4 incluye los tres modos; el experto supone un sistema propio del metro |
-| D-10 | La tarjeta bancaria paga tarifa plena y sí tiene integración | B2.5, B3.3 |
-| D-21 | Las reglas variables son parámetros sin valor inventado | Lo que el experto dio como supuesto o con certeza baja |
-| D-30 | Exactamente una vista para cada V1–V11; V6 contiene once bloques independientes, uno por dominio | Cumple la organización compacta del enunciado y permite recorrer el modelo durante la sustentación. |
+Los once contextos principales llegan a una meta. Rutas y calendario participa en la recepción y la consolidación; Avisos responde al requerimiento de informar al usuario; Auditoría y soportes responde a los requerimientos de trazabilidad y evidencia. Los sistemas externos y sus adaptadores no realizan directamente las metas de la aplicación, por eso no aparecen como destino final de esta vista.
