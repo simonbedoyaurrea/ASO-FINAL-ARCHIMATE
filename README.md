@@ -4,7 +4,7 @@
 
 > **Modelo único y definitivo:** [`modelo/recaudo_tema4.archimate`](modelo/recaudo_tema4.archimate). Se abre en Archi 5.x; sus once vistas V1–V11 están directamente en la carpeta *Views*, sin subcarpetas.
 > Integra todas las fases: 799 elementos, 1474 relaciones y 11 vistas.
-> Las carpetas `fase 1/` y `fase 2/` son **antecedentes** (borradores anteriores) y no forman parte de la entrega.
+
 
 ## Índice
 
