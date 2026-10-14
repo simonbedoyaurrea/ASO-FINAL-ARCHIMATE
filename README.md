@@ -1,313 +1,396 @@
-# Diseño de Arquitectura Empresarial con ArchiMate y DDD
+# Recaudo del sistema integrado de transporte de una ciudad mediana
 
-**Tema 4 — Recaudo del sistema integrado de transporte de una ciudad mediana**
-**Estado:** repositorio simplificado; el diseño y las evidencias requieren revisión y validación del equipo.
+**Proyecto:** «Diseño de la arquitectura de una aplicación empresarial con ArchiMate y DDD», Tema 4. Arquitectura de Software, UPB.
 
-## Presentación
-
-Este proyecto académico organiza el entendimiento del negocio y el diseño de una aplicación para apoyar el recaudo de un sistema integrado de transporte. El equipo elaborará y justificará sus decisiones usando **ArchiMate** y **Domain-Driven Design (DDD)**.
-
-### Problema de negocio
-
-El caso asignado aborda el recaudo asociado a buses alimentadores, buses articulados y metro. El sistema debe considerar pagos con tarjeta VAMOS y tarjetas débito/crédito, el ciclo de vida de VAMOS, tarifas plenas o especiales, perfiles y transbordos, y la consolidación por modo, ruta y operador para distribución y conciliación. Estos puntos describen el caso asignado; su interpretación y las decisiones de diseño deben ser validadas por el equipo.
-
-### Objetivos académicos
-
-- Entender el negocio mediante una entrevista y analizar sus hallazgos.
-- Modelar motivación, capacidades y proceso de extremo a extremo.
-- Descomponer servicios y documentar sus contratos.
-- Aplicar DDD estratégico y táctico, con trazabilidad entre vistas.
-- Justificar las decisiones del equipo con evidencia verificable.
-
-### Alcance y exclusiones del caso
-
-El alcance de negocio incluye las operaciones de recaudo, medios de pago, tarifas, perfiles, transbordos, consolidación y conciliación descritas en el enunciado asignado. Los validadores, lectores, otros dispositivos e IoT están fuera del alcance indicado: la aplicación recibe transacciones y no administra esos equipos. Las interoperabilidades con atención al cliente, finanzas, planeación, redes de pago, certificadores de perfiles y autoridad de transporte son aspectos por investigar; esta lista no afirma que estén diseñados o validados.
-
-**Fuente académica:** existe una copia local del enunciado, excluida de Git por privacidad y revisión de publicación. Confirmar con el profesor que su versión esté vigente antes de cerrar la trazabilidad o declarar cumplimiento. La descripción de este README no sustituye al enunciado oficial.
+> **Modelo único y definitivo:** [`modelo/recaudo_tema4.archimate`](modelo/recaudo_tema4.archimate). Se abre en Archi 5.x; sus once vistas V1–V11 están directamente en la carpeta *Views*, sin subcarpetas.
+> Integra todas las fases: 799 elementos, 1474 relaciones y 11 vistas.
+> Las carpetas `fase 1/` y `fase 2/` son **antecedentes** (borradores anteriores) y no forman parte de la entrega.
 
 ## Índice
 
-- [Fases F0–F6](#fases-f0-f6)
-  - [F0 — Entrevista](#fase-f0)
-  - [F1 — Motivación, capacidades y E2E](#fase-f1)
-  - [F2 — Servicios](#fase-f2)
-  - [F3 — DDD estratégico](#fase-f3)
-  - [F4 — DDD táctico](#fase-f4)
-  - [F5 — Contextos delimitados](#fase-f5)
-  - [F6 — Bounded Context Canvas](#fase-f6)
-- [Vistas V01–V11](#vistas-v01-v11)
-  - [V01 — Motivación](#vista-v01)
-  - [V02 — Capacidades](#vista-v02)
-  - [V03 — Cadena de valor y E2E](#vista-v03)
-  - [V04 — Servicios](#vista-v04)
-  - [V05 — Dominios](#vista-v05)
-  - [V06 — Agregados, comandos y eventos](#vista-v06)
-  - [V07 — Lenguaje ubicuo](#vista-v07)
-  - [V08 — Contextos](#vista-v08)
-  - [V09 — Interoperabilidad](#vista-v09)
-  - [V10 — Trazabilidad](#vista-v10)
-  - [V11 — Bounded Context Canvas](#vista-v11)
-- [Alcance y reglas](#alcance-y-reglas)
-- [Servicios y contratos](#servicios-y-contratos)
-- [Lenguaje ubicuo](#lenguaje-ubicuo)
-- [Decisiones y supuestos](#decisiones-y-supuestos)
-- [Trazabilidad](#trazabilidad)
-- [Aportes del equipo](#aportes-del-equipo)
-- [Modelo y exportaciones](#modelo-y-exportaciones)
-- [Checklist de entrega](#checklist-de-entrega)
-- [Principios de documentación](#principios-de-documentación)
+0. [Cómo está organizada la entrega](#0-cómo-está-organizada-la-entrega)
+1. [Contexto y entrevista](#1-contexto-y-entrevista)
+2. [Motivación](#2-motivación) · [V1](#v1-por-qué-existe-la-aplicación-de-los-interesados-a-los-requerimientos)
+3. [Mapa de capacidades y proceso E2E](#3-mapa-de-capacidades-y-proceso-e2e) · [V2](#v2-mapa-de-capacidades-del-negocio) · [V3](#v3-cadena-de-valor-proceso-e2e-y-dónde-se-ubica-la-aplicación)
+4. [Descomposición de servicios](#4-descomposición-de-servicios) · [V4](#v4-seis-capas-qué-entra-y-qué-no-contratos-y-quién-presta-los-servicios)
+5. [Dominios y lenguaje ubicuo](#5-dominios-y-lenguaje-ubicuo) · [V5](#v5-dominios-y-su-clasificación) · [V7](#v7-lenguaje-ubicuo)
+6. [Agregados, comandos y eventos](#6-agregados-comandos-y-eventos) · [V6](#v6-un-diagrama-por-dominio-en-una-sola-vista)
+7. [Mapa de contextos e interoperabilidad](#7-mapa-de-contextos-e-interoperabilidad) · [V8](#v8-mapa-de-contextos-delimitados) · [V9](#v9-interoperabilidad-y-anticorrupción)
+8. [Bounded Context Canvas](#8-bounded-context-canvas) · [V11](#v11-canvas-del-contexto-tarifas-y-transbordos)
+9. [Trazabilidad vertical](#9-trazabilidad-vertical) · [V10](#v10-de-la-meta-al-componente)
+10. [Decisiones y supuestos](#10-decisiones-y-supuestos)
+11. [Validación, fuentes y limitaciones](#11-validación-fuentes-y-limitaciones)
+12. [Tabla de aportes](#12-tabla-de-aportes)
 
-<a id="fases-f0-f6"></a>
+**Acceso directo a las vistas:** [V1](#v1-por-qué-existe-la-aplicación-de-los-interesados-a-los-requerimientos) · [V2](#v2-mapa-de-capacidades-del-negocio) · [V3](#v3-cadena-de-valor-proceso-e2e-y-dónde-se-ubica-la-aplicación) · [V4](#v4-seis-capas-qué-entra-y-qué-no-contratos-y-quién-presta-los-servicios) · [V5](#v5-dominios-y-su-clasificación) · [V6](#v6-un-diagrama-por-dominio-en-una-sola-vista) · [V7](#v7-lenguaje-ubicuo) · [V8](#v8-mapa-de-contextos-delimitados) · [V9](#v9-interoperabilidad-y-anticorrupción) · [V10](#v10-de-la-meta-al-componente) · [V11](#v11-canvas-del-contexto-tarifas-y-transbordos)
 
-## Fases F0–F6
+---
 
-Checklist de avance académico. Las casillas se marcarán solo cuando el equipo valide los entregables y su evidencia.
+## 0. Cómo está organizada la entrega
 
-- [ ] **F0 — Entrevista al experto:** guion, instrucción de rol, conversación completa autorizada y análisis de hallazgos del equipo.
-- [ ] **F1 — Motivación, capacidades y proceso E2E:** modelo del negocio, capacidades impactadas, motivación y proceso de extremo a extremo.
-- [ ] **F2 — Descomposición de servicios:** capas de servicios, inclusión/exclusión justificada, interoperabilidad y contratos Contract First.
-- [ ] **F3 — DDD estratégico:** dominios clasificados y lenguaje ubicuo validado.
-- [ ] **F4 — DDD táctico:** entidades y objetos de valor, agregados con límites e invariantes, comandos y eventos por dominio.
-- [ ] **F5 — Mapa de contextos delimitados:** contextos, relaciones y patrones documentados.
-- [ ] **F6 — Bounded Context Canvas:** Canvas del contexto principal, completo y coherente con el modelo.
+| Ruta | Contenido |
+|---|---|
+| [`modelo/recaudo_tema4.archimate`](modelo/recaudo_tema4.archimate) | Modelo ArchiMate único y definitivo (Archi 5.x, ArchiMate 3.2) |
+| [`vistas/`](vistas/) | Las 11 vistas exportadas por Archi (un PNG por vista, con el código de la vista como nombre) |
+| [`entrevista/`](entrevista/) | [Conversación íntegra](entrevista/conversacion_fase0_completa.txt), [instrucción de rol](entrevista/instruccion_de_rol.md), [guion](entrevista/guion.md), [análisis de hallazgos](entrevista/analisis_hallazgos.md), [índice de referencias](entrevista/indice_referencias.md) y el Word original con capturas |
+| [`docs/final/`](docs/final/) | Documentos completos: [inclusión y exclusión](docs/final/inclusion_exclusion.md), [anticorrupción](docs/final/anticorrupcion.md), [contratos](docs/final/contratos_servicios.md), [dominios](docs/final/dominios.md), [lenguaje ubicuo](docs/final/lenguaje_ubicuo.md), [agregados e invariantes](docs/final/agregados.md), [contextos y patrones](docs/final/contextos.md), [trazabilidad](docs/final/trazabilidad.md), [decisiones y supuestos](docs/final/decisiones_y_supuestos.md) y [validación](docs/final/validacion.md) |
+| [`herramientas/`](herramientas/) | Catálogo de datos y scripts que generan el modelo, las tablas y los contratos, exportan las vistas y validan el modelo (ver §11) |
+| [Enunciado](enunciado/Proyecto_Diseño_Arquitectura_ArchiMate%20(1).docx), [resumen del enunciado](docs/contexto/01_enunciado.md), [Tema 4 literal](docs/contexto/02_tema4_recaudo.md), [`diapositivas/`](diapositivas/), [mapa antecedente](mapa_capacidades_recaudo.pdf) y [Word de evidencia de la entrevista](entrevista/capturas_y_tabla_del_equipo_El_pago_integrado_se_divide_por_reglas.docx) | Fuentes académicas, evidencia y antecedentes disponibles en esta copia |
+| `fase 1/`, `fase 2/`, `docs/fase0`, `docs/fase1` | Antecedentes de trabajo anteriores (sin cambios) |
 
-### <a id="fase-f0"></a>F0 — Entrevista al experto del negocio
+**Cómo se citan las fuentes:** «T4» es el Tema 4 del enunciado. «B3.1» es el bloque 3, sección 1 de la entrevista, y cada referencia indica sus líneas en la conversación (por ejemplo, «Entrevista B3.1 (l. 198-210)»). «D-04» y «S-03» son decisiones y supuestos de [decisiones_y_supuestos.md](docs/final/decisiones_y_supuestos.md). Los elementos que representan hechos, supuestos o decisiones documentan su procedencia en la propiedad «Fuente»; los elementos puramente estructurales o de diagramación pueden no llevarla.
 
-**Objetivo:** comprender el negocio mediante preguntas, registrar la conversación autorizada y analizar qué hallazgos acepta, descarta o contrasta el equipo. La IA puede aportar conocimiento del negocio durante la entrevista; no debe producir los artefactos de diseño evaluados.
+**Organización de las vistas (D-30).** El modelo tiene **exactamente once vistas, V1 a V11**, directamente en la carpeta *Views* de Archi y en ese orden. La V6 es una sola vista con **un diagrama independiente por dominio**: once bloques titulados, que se pueden mover y ampliar por separado y de los que no sale ninguna línea. El enunciado pide «un diagrama por dominio», no una vista por dominio. Las tablas, las especificaciones completas y los ejemplos están en `docs/final/`.
 
-**Evidencia:** PENDIENTE. No se encontraron archivos de entrevista autorizados en el árbol actual.
-**Explicación y análisis:** PENDIENTE.
-**Justificación y validación:** PENDIENTE.
-**Relaciones y trazabilidad:** conectar hallazgos validados con las fases y vistas correspondientes, PENDIENTE.
-**Estado:** PENDIENTE.
+| Vista | Qué muestra |
+|---|---|
+| V1 Motivación | Interesados, impulsores, evaluaciones, metas, resultados, cursos de acción, requerimientos, principios y restricciones |
+| V2 Capacidades | El mapa completo del negocio, el impacto de la aplicación y los recursos dentro de su capacidad |
+| V3 Cadena de valor y E2E | La cadena de valor, el proceso por carriles con los recorridos de VAMOS y de tarjeta bancaria, y debajo de cada paso el servicio de la aplicación que lo apoya |
+| V4 Servicios | Las seis capas, lo que entra y lo que no, el contrato de cada servicio de dominio, y quién presta los servicios con qué información |
+| V5 Dominios | Los once dominios por clasificación, con sus objetos y su contexto |
+| V6 Agregados | Once diagramas, uno por dominio, con raíz, límite, comandos, eventos, políticas e invariantes |
+| V7 Lenguaje ubicuo | El glosario por contexto, con definición y ejemplo, y las palabras con varios significados |
+| V8 Mapa de contextos | Los contextos con su responsabilidad, su API y sus servicios, y los patrones de relación |
+| V9 Interoperabilidad | Cada intercambio externo con su dirección, la interfaz, el traductor, el servicio anticorrupción de la Fase 2 y su contrato |
+| V10 Trazabilidad | De la meta al componente, con relaciones visibles, para los 11 contextos |
+| V11 Canvas | El contexto principal, Tarifas y transbordos |
 
-### <a id="fase-f1"></a>F1 — Motivación, capacidades y proceso E2E
+**Recorrido sugerido para la sustentación (30 minutos):**
+1. V1 y V2: por qué existe la aplicación, qué debe cumplir y dónde actúa (5 min).
+2. V3: el proceso, sus dos recorridos y dónde está la aplicación (4 min).
+3. V4: las capas, lo que entra y lo que no, los contratos y quién presta los servicios (5 min).
+4. V5 y V7: dominios y lenguaje (4 min).
+5. V6: los dos diagramas de los dominios centrales; los otros se amplían si lo preguntan (4 min).
+6. V8, V9 y V11: contextos, intercambios externos y canvas (6 min).
+7. V10: trazabilidad de la meta al componente (2 min).
 
-**Objetivo:** representar por qué se requiere la aplicación, las capacidades de negocio relevantes y la ubicación del proceso E2E.
-**Evidencia:** diagramas V01–V03 están presentes estructuralmente en el modelo; revisión del equipo y exportaciones PNG PENDIENTES.
-**Explicación, justificación y relaciones entre vistas:** PENDIENTES.
-**Estado:** PENDIENTE de validación académica.
+**Nombres en lenguaje cotidiano.** Las cajas y los textos de las vistas usan palabras sencillas («cuadrar la plata» en vez de «conciliar», «tarjeta del banco» en vez de «tarjeta bancaria de pago abierto»). El nombre técnico anterior de cada elemento no se perdió: está en su propiedad «Nombre técnico» dentro del modelo. Quedan con su redacción original los textos que vienen literalmente del Tema 4 (GOL01 y REQ01 a REQ05), los términos del glosario, porque son las palabras del negocio y deben ser las mismas en todo el modelo, y los conceptos del curso (agregado, contexto, dominio, capas de servicio, Contract First, canvas), que en cada vista van acompañados de una explicación corta.
 
-### <a id="fase-f2"></a>F2 — Descomposición de servicios
+**Frontera de la aplicación (D-01, D-04, D-05, D-06).** La aplicación es la plataforma central de recaudo del ente gestor. **Dentro:** medios VAMOS, perfiles, reglas tarifarias, recepción y recálculo de transacciones, cobro agrupado al pasajero con tarjeta bancaria y consolidación por día de servicio, modo, ruta y operador. **Fuera:** el hardware, la conectividad y el monitoreo de validadores y lectores; la conciliación financiera; la liquidación contractual a operadores; la orden y ejecución del pago a operadores; contabilidad, PQRS, analítica, fraude y efectivo. La aplicación intercambia con los sistemas de los equipos transacciones y confirmaciones de entrada, y parámetros, listas y operaciones pendientes de salida, sin administrar los dispositivos. Entrega al proceso externo una base consolidada sin conciliar; allí se concilia con el dinero, se liquida según contratos y la fiduciaria ejecuta los pagos. El cobro agrupado al pasajero sí permanece dentro del alcance.
 
-**Objetivo:** descomponer el proceso E2E en servicios, justificar inclusiones y exclusiones, documentar interoperabilidad y aplicar Contract First. El requisito registrado para el curso indica al menos cuatro capas; confirmar vigencia con el enunciado oficial.
-**Evidencia:** V04 está presente estructuralmente en el modelo; matriz y contratos PENDIENTES.
-**Explicación, justificación y trazabilidad:** PENDIENTES.
-**Estado:** PENDIENTE de validación académica.
+---
 
-### <a id="fase-f3"></a>F3 — DDD estratégico
+## 1. Contexto y entrevista
 
-**Objetivo:** analizar el ecosistema, identificar y justificar dominios y sus clasificaciones, y acordar lenguaje ubicuo.
-**Evidencia:** V05 y V07 están presentes estructuralmente en el modelo; glosario validado PENDIENTE.
-**Explicación, justificación y relaciones:** PENDIENTES.
-**Estado:** PENDIENTE de validación académica.
+**Solicitud (Tema 4):** «Operamos el sistema integrado de transporte de la ciudad, con tres modos… Necesitamos un software que apoye el proceso de recaudo… y que permita a residentes y visitantes pagar su viaje de forma ágil y con la tarifa que les corresponde». El alcance cubre:
+- Tres medios de pago: VAMOS, débito y crédito.
+- Gestión de VAMOS.
+- Tarifas y perfiles.
+- Tarifa correcta con transbordos.
+- Consolidación por modo, ruta y operador, como base para la distribución y la conciliación.
 
-### <a id="fase-f4"></a>F4 — DDD táctico
+Los dispositivos quedan fuera.
 
-**Objetivo:** documentar entidades y objetos de valor, límites e invariantes de agregados, y diagramas de comandos y eventos para cada dominio identificado por el equipo.
-**Evidencia:** V06 está presente estructuralmente en el modelo; revisión del número y alcance de diagramas PENDIENTE.
-**Explicación, justificación y relaciones:** PENDIENTES.
-**Estado:** PENDIENTE de validación académica.
+**Entrevista (Fase 0).** El equipo configuró un experto simulado con una [instrucción de rol](entrevista/instruccion_de_rol.md) que le prohíbe proponer diseño y le exige marcar cada afirmación como [Norma], [Práctica] o [Supuesto] con su nivel de certeza. La [conversación íntegra](entrevista/conversacion_fase0_completa.txt) tiene diez bloques temáticos (B1-B10), incluido un bloque específico de interoperabilidad (B9). Las preguntas enviadas están en el [guion](entrevista/guion.md), con su redacción literal.
 
-### <a id="fase-f5"></a>F5 — Mapa de contextos delimitados
+El [análisis de hallazgos](entrevista/analisis_hallazgos.md) clasifica 44 hallazgos en aceptados, aceptados como supuesto configurable, contrastados o descartados, e indica en qué parte del diseño influye cada uno. Algunos resultados de ese análisis:
+- Las normas que el diseño usa como restricción se contrastaron con su texto publicado: Ley 1581 de 2012 y Ley 1755 de 2015. Las demás no se usan como reglas.
+- Los umbrales de indicadores se descartaron porque el experto dijo que no son estándar.
+- La fila 10 de la tabla del equipo («transbordo solo con VAMOS») se corrigió con la entrevista (D-10).
+- Los turnos finales de la conversación, en los que se pidió al asistente generar un mapa y modelos, **no** se usan como hallazgos.
 
-**Objetivo:** documentar contextos delimitados, relaciones entre ellos y patrones de integración coherentes con las decisiones del equipo.
-**Evidencia:** V08 y V09 están presentes estructuralmente en el modelo; validación PENDIENTE.
-**Explicación, justificación y relaciones:** PENDIENTES.
-**Estado:** PENDIENTE de validación académica.
+---
 
-### <a id="fase-f6"></a>F6 — Bounded Context Canvas
+## 2. Motivación
 
-**Objetivo:** documentar el contexto principal en un Canvas de una página, con decisiones y supuestos justificados por el equipo.
-**Evidencia:** V11 está presente estructuralmente en el modelo; revisión del contenido y de la herramienta PENDIENTE.
-**Explicación, justificación y relaciones:** PENDIENTES.
-**Estado:** PENDIENTE de validación académica.
+### V1. Por qué existe la aplicación: de los interesados a los requerimientos
+![V1](vistas/V1.png)
 
-<a id="vistas-v01-v11"></a>
+**Análisis.** Una sola vista recorre toda la motivación, de izquierda a derecha:
+- **Interesados (B1.1) e impulsores (B1.2).**
+- **Evaluaciones:** los diagnósticos del experto, como «sin caja no hay operación» o los reclamos frecuentes y su causa.
+- **Metas:** son cuatro. GOL01 viene literal del Tema 4; GOL02 es lo que busca la gerencia (B1.4); GOL03 sale del requisito de verificar perfiles, y GOL04 responde a las necesidades del usuario.
+- **Resultados y cursos de acción:** a la derecha de cada meta. Cada resultado dice en su propiedad «Indicador» cómo se mide (B7.2), sin umbrales, porque el experto aclaró que los suyos no son estándar (B7.3). Cada curso de acción va con las capacidades que lo hacen posible. COA02, «centralizar en el ente gestor las reglas… y recibir las transacciones», es la decisión de frontera D-01 expresada como estrategia.
+- **Requerimientos:** a la derecha de cada resultado.
+  - REQ01 a REQ05 son el alcance literal del Tema 4; REQ03 nombra los cuatro perfiles especiales (D-29).
+  - REQ06 a REQ12 se **derivan** de lo que dijo el experto, porque la entrevista no preguntó requerimientos de forma directa. Cubren idempotencia y día de servicio, ajustes con huella, doble control, tokenización, continuidad temporal ante pérdida de conectividad con la última configuración local, evidencia de perfiles y avisos al usuario (REQ12, B9.12).
+- **Principios y restricciones:** en la última columna, influyendo (+ y −) sobre cada requerimiento.
+  - Los principios son las «reglas de oro» del experto (B1.6).
+  - Las restricciones son lo que no se puede cambiar (B1.5), la exclusión de dispositivos (T4) y las dos leyes contrastadas.
+  - Dos principios quedan sin línea a propósito, la separación de dineros y la doble verificación con el banco: aplican a la conciliación y al pago, que están fuera (D-04).
 
-## Vistas V01–V11
+**Argumentación.** Se sigue el patrón de 6_TOGAF diap. 41:
+- la evaluación influye en la meta;
+- el resultado y el curso de acción realizan la meta;
+- el requerimiento realiza el resultado;
+- la capacidad realiza el curso de acción.
 
-Checklist de vistas; la casilla permanece pendiente hasta que el equipo revise el contenido y la exportación correspondiente.
+Juntar todo en una vista muestra la cadena completa de la motivación que pide el enunciado. Es alta, pero se lee en columnas y sin cruces; un elemento se repite cuando se relaciona con varios de la columna anterior.
 
-- [ ] V01 — Motivación.
-- [ ] V02 — Mapa de capacidades.
-- [ ] V03 — Cadena de valor y proceso E2E.
-- [ ] V04 — Descomposición de servicios.
-- [ ] V05 — Dominios.
-- [ ] V06 — Agregados, comandos y eventos por dominio.
-- [ ] V07 — Lenguaje ubicuo.
-- [ ] V08 — Mapa de contextos delimitados.
-- [ ] V09 — Interoperabilidad y anticorrupción.
-- [ ] V10 — Trazabilidad vertical.
-- [ ] V11 — Bounded Context Canvas.
+---
 
-El archivo [`modelo/recaudo-multimodal.archimate`](modelo/recaudo-multimodal.archimate) contiene diagramas cuyo nombre corresponde a V1–V11. La lista siguiente registra su presencia en el XML; no acredita que el contenido sea correcto, que corresponda a la versión vigente del enunciado ni que haya sido aprobado por el equipo. No hay exportaciones PNG en el árbol actual.
+## 3. Mapa de capacidades y proceso E2E
 
-### <a id="vista-v01"></a>V01 — Motivación
+### V2. Mapa de capacidades del negocio
+![V2](vistas/V2.png)
 
-**Objetivo:** explicar la razón empresarial para la aplicación y sus relaciones motivacionales.
-**Evidencia:** diagrama `V1 · Motivación: de los interesados a los requerimientos` en el modelo; PNG PENDIENTE.
-**Explicación:** PENDIENTE. **Justificación:** PENDIENTE. **Relaciones/trazabilidad:** PENDIENTE.
-**Estado:** presente estructuralmente; revisión del equipo PENDIENTE.
+**Análisis.** El mapa tiene 15 grupos de nivel 1 y 57 capacidades de nivel 2, estratégicas, misionales y de apoyo, con la paleta de 7_SOA diap. 35. El impacto se marca así:
+- **Alto** (borde naranja): la capacidad la realiza la aplicación. Son 13.
+- **Medio** (borde azul): la capacidad intercambia información con la aplicación. Son 23.
+- **Sin impacto:** son 21.
 
-### <a id="vista-v02"></a>V02 — Mapa de capacidades
+Los **recursos** (café claro) van dentro de la capacidad a la que se asignan; ArchiMate permite mostrar la asignación por anidamiento (6_TOGAF diap. 27). Los **cursos de acción** están en la V1, junto a la meta que realizan y a las capacidades que los hacen posibles.
 
-**Objetivo:** representar capacidades del negocio e identificar las impactadas, según validación del equipo.
-**Evidencia:** diagrama `V2 · Mapa de capacidades del negocio` en el modelo; PNG PENDIENTE.
-**Explicación:** PENDIENTE. **Justificación:** PENDIENTE. **Relaciones/trazabilidad:** PENDIENTE.
-**Estado:** presente estructuralmente; revisión del equipo PENDIENTE.
+**Argumentación.** El mapa es del **negocio completo** (D-15). Por eso incluye capacidades sin impacto, como la operación de cada modo, el efectivo, la parte jurídica, talento humano e infraestructura. Así se evita el nivel «mapa centrado solo en la aplicación».
+- **Las capacidades no se conectan entre sí:** no son pasos de un proceso.
+- **Dónde actúa la aplicación:** se ve por el borde. La relación «la aplicación realiza la capacidad» está en el modelo y se recorre en la V10.
 
-### <a id="vista-v03"></a>V03 — Cadena de valor y proceso E2E
+### V3. Cadena de valor, proceso E2E y dónde se ubica la aplicación
+![V3](vistas/V3.png)
 
-**Objetivo:** situar la aplicación dentro de la cadena de valor y el proceso de extremo a extremo.
-**Evidencia:** diagrama `V3 · Cadena de valor y proceso E2E: dónde se ubica la aplicación` en el modelo; PNG PENDIENTE.
-**Explicación:** PENDIENTE. **Justificación:** PENDIENTE. **Relaciones/trazabilidad:** PENDIENTE.
-**Estado:** presente estructuralmente; revisión del equipo PENDIENTE.
+**Análisis.**
+- **Arriba, la cadena de valor:** cada paso sube a la etapa que realiza.
+- **En el medio, el proceso:** cada paso está en el carril de quien lo hace.
+- **Debajo de cada paso apoyado, el servicio de la aplicación (cian) que le sirve.** Así se ve dónde se ubica la aplicación:
+  - Hace la venta y la recarga, la tarificación, el cobro agrupado y la consolidación.
+  - A los equipos les entrega las versiones de tarifas, perfiles, reglas de integración, listas de bloqueo y calendario que necesitan para validar localmente (D-05).
+  - Al sistema externo de conciliación y liquidación le entrega la base consolidada sin conciliar (D-04, D-25).
+  - A la contabilidad le envía el resumen por el traductor SA07 (D-08).
+  - Los pasos grises están fuera de la aplicación.
+- **El registro de la tarifa vigente** (área de recaudo del ente gestor) también está en la V3, porque realiza la primera etapa. Los trámites de tarjeta y perfil y la atención de reclamos son procesos de soporte que no ocurren en cada viaje; están en el modelo y sirven a la V4.
 
-### <a id="vista-v04"></a>V04 — Descomposición de servicios
+**Recorridos:**
+- **Tarjeta bancaria:** escoger cómo pagar → validar. Después de tarificar, solo ella pasa por el cobro agrupado.
+- **VAMOS:** ¿tiene tarjeta?
+  - Sin tarjeta: compra y recarga.
+  - Con tarjeta: ¿saldo suficiente?
+    - Saldo insuficiente: recarga.
+    - **Saldo suficiente: valida directamente**, sin recargar.
+- **La tarifa (D-05):** la autoridad autoriza las tarifas y descuentos. El ente gestor registra, versiona y publica sus reglas. En el acceso, el equipo calcula y aplica localmente la tarifa con la versión vigente; ante una pérdida de conectividad puede continuar temporalmente con la última configuración y sincronizar después. Al recibir la transacción, la aplicación central recalcula la tarifa correcta según versión, perfil e integración, compara el resultado con lo aplicado por el equipo y registra las diferencias. Para tarjeta bancaria, ese cálculo central determina el valor que entra al cobro agrupado.
+- **La consolidación:** el consumo se atribuye por día de servicio, modo, ruta y operador. Las recargas y los resultados de cobro bancario se conservan como líneas de control separadas y no se suman al consumo ni a la base de distribución.
 
-**Objetivo:** documentar capas, alcance, inclusión/exclusión e interoperabilidad del proceso E2E.
-**Evidencia:** diagrama `V4 · Descomposición de servicios: seis capas, alcance y contratos` en el modelo; PNG PENDIENTE. La mención de seis capas es solo el título guardado en el modelo y requiere validación.
-**Explicación:** PENDIENTE. **Justificación:** PENDIENTE. **Relaciones/trazabilidad:** PENDIENTE.
-**Estado:** presente estructuralmente; revisión del equipo PENDIENTE.
+**Argumentación.** Para que la aplicación cupiera en la misma vista sin cruzar líneas, la pregunta del VAMOS se dividió en dos bifurcaciones, ¿tiene tarjeta? y ¿saldo suficiente?, que es además la lógica real del recorrido. Los servicios de la aplicación van justo debajo del paso al que sirven, con la relación «sirve a» de servicio de aplicación a proceso de negocio (6_TOGAF diap. 44).
 
-### <a id="vista-v05"></a>V05 — Dominios
+---
 
-**Objetivo:** documentar dominios y justificar su clasificación a partir del entendimiento del negocio.
-**Evidencia:** diagrama `V5 · Dominios y su clasificación` en el modelo; PNG PENDIENTE.
-**Explicación:** PENDIENTE. **Justificación:** PENDIENTE. **Relaciones/trazabilidad:** PENDIENTE.
-**Estado:** presente estructuralmente; revisión del equipo PENDIENTE.
+## 4. Descomposición de servicios
 
-### <a id="vista-v06"></a>V06 — Agregados, comandos y eventos por dominio
+Hay seis capas de servicio reales (7_SOA diap. 20 y 28); el proceso E2E está encima y **no se cuenta como capa**. En total son 84 servicios: 74 incluidos y 10 excluidos. Están en la [tabla de inclusión y exclusión](docs/final/inclusion_exclusion.md), con la justificación y la fuente de cada uno.
 
-**Objetivo:** mostrar, para cada dominio que acuerde el equipo, agregados con límites/invariantes y sus comandos y eventos.
-**Evidencia:** diagrama `V6 · Agregados, comandos y eventos: un diagrama por dominio` en el modelo; PNG PENDIENTE. La cobertura por dominio debe verificarse.
-**Explicación:** PENDIENTE. **Justificación:** PENDIENTE. **Relaciones/trazabilidad:** PENDIENTE.
-**Estado:** presente estructuralmente; revisión del equipo PENDIENTE.
+### V4. Seis capas, qué entra y qué no, contratos y quién presta los servicios
+![V4](vistas/V4.png)
 
-### <a id="vista-v07"></a>V07 — Lenguaje ubicuo
+**Análisis.**
+- **Izquierda, el árbol de servicios:** pasos del proceso → capa 1 (plataforma) → capa 2 (dominio) → **contrato** de cada servicio de dominio (Contract First, D-13).
+- **Derecha, quién presta los servicios:** el ente gestor asigna los roles; cada rol responde por funciones; cada función realiza servicios de dominio y usa información del negocio (acceso). El *Perfil especial* se divide en los **cuatro perfiles del Tema 4** (D-29).
+- **Debajo, completas, las capas 3 a 6:**
+  - Capa 3: servicios básicos, cada uno en el recuadro del servicio de dominio al que sirve.
+  - Capa 4: traductores hacia afuera; sus intercambios con dirección están en la V9.
+  - Capa 5: datos maestros.
+  - Capa 6: servicios comunes.
+- **Excluidos:** van en gris (D-12): conciliación financiera, liquidación y pago a operadores (D-04), contabilidad (D-08), PQRS (D-07), analítica, dispositivos (D-06), efectivo y comisiones, y fraude. El cobro agrupado al pasajero con tarjeta bancaria sí está incluido.
 
-**Objetivo:** registrar términos y significados validados por contexto.
-**Evidencia:** diagrama `V7 · Lenguaje ubicuo: glosario por contexto y palabras con varios significados` en el modelo; PNG PENDIENTE.
-**Explicación:** PENDIENTE. **Justificación:** PENDIENTE. **Relaciones/trazabilidad:** PENDIENTE.
-**Estado:** presente estructuralmente; revisión del equipo PENDIENTE.
+**Argumentación.** Son seis capas reales (7_SOA diap. 20 y 28); el proceso E2E está encima y no se cuenta como capa. El tamaño de cada servicio sigue las preguntas de 7_SOA diap. 33: quién es responsable y quién gestiona los datos. Por ejemplo, el saldo pertenece a SD4 y la transacción a SD5.
 
-### <a id="vista-v08"></a>V08 — Mapa de contextos delimitados
+**Contract First.** Cada servicio incluido tiene su objeto *contract*, en total 74; ArchiMate 3.2 solo permite asociación entre contrato y servicio. La V4 muestra los contratos de dominio y la V9 los de la capa anticorrupción. Todos están en el modelo y su especificación completa en [contratos_servicios.md](docs/final/contratos_servicios.md):
+- operación, entrada y salida;
+- precondiciones y postcondiciones (9_DDD diap. 39);
+- reglas y errores;
+- requisitos no funcionales;
+- **formato y protocolo** (D-24);
+- versión (7_SOA diap. 44-47).
 
-**Objetivo:** documentar contextos y relaciones acordadas por el equipo.
-**Evidencia:** diagrama `V8 · Mapa de contextos delimitados` en el modelo; PNG PENDIENTE.
-**Explicación:** PENDIENTE. **Justificación:** PENDIENTE. **Relaciones/trazabilidad:** PENDIENTE.
-**Estado:** presente estructuralmente; revisión del equipo PENDIENTE.
+La justificación de cada inclusión y exclusión está en la [tabla de inclusión y exclusión](docs/final/inclusion_exclusion.md): 84 servicios, de los que 74 entran y 10 no.
 
-### <a id="vista-v09"></a>V09 — Interoperabilidad y anticorrupción
+---
 
-**Objetivo:** documentar intercambios con procesos, sistemas u organizaciones externas y los mecanismos acordados por el equipo.
-**Evidencia:** diagrama `V9 · Interoperabilidad y anticorrupción` en el modelo; PNG PENDIENTE.
-**Explicación:** PENDIENTE. **Justificación:** PENDIENTE. **Relaciones/trazabilidad:** PENDIENTE.
-**Estado:** presente estructuralmente; revisión del equipo PENDIENTE.
+## 5. Dominios y lenguaje ubicuo
 
-### <a id="vista-v10"></a>V10 — Trazabilidad vertical
+A partir de aquí el diseño pasa a la capa de aplicación. **Cómo se extrajeron los dominios** (9_DDD diap. 8-10):
+1. Estructura de la organización (B2.1, B4.2).
+2. Proceso detallado con sus eventos (los de la V6).
+3. Puntos de corte donde cambia el dueño del dato. Por ejemplo, la transacción la acepta Recepción de transacciones, le calcula la tarifa Tarifas y transbordos y la asigna a su ruta y operador Consolidación.
 
-**Objetivo:** relacionar metas y requisitos con elementos de las capas pertinentes, según el diseño validado.
-**Evidencia:** diagrama `V10 · Trazabilidad vertical: de cada requerimiento a sus componentes (REQ01-REQ12)` en el modelo; PNG PENDIENTE. Los identificadores del título requieren verificación con el enunciado vigente.
-**Explicación:** PENDIENTE. **Justificación:** PENDIENTE. **Relaciones/trazabilidad:** PENDIENTE.
-**Estado:** presente estructuralmente; revisión del equipo PENDIENTE.
+La tabla de eventos por dominio y los argumentos completos están en [dominios.md](docs/final/dominios.md).
 
-### <a id="vista-v11"></a>V11 — Bounded Context Canvas
+### V5. Dominios y su clasificación
+![V5](vistas/V5.png)
 
-**Objetivo:** documentar en una página el contexto seleccionado, sus decisiones y supuestos, de acuerdo con el enunciado vigente.
-**Evidencia:** diagrama `V11 · Bounded Context Canvas: Tarifas y transbordos` en el modelo; PNG PENDIENTE. El contexto indicado por el título requiere aprobación del equipo.
-**Explicación:** PENDIENTE. **Justificación:** PENDIENTE. **Relaciones/trazabilidad:** PENDIENTE.
-**Estado:** presente estructuralmente; revisión del equipo PENDIENTE.
+**Análisis y argumentación (9_DDD diap. 11).** Cada dominio muestra sus objetos de negocio y el contexto que lo implementa.
+- **Centrales:**
+  - *Tarifas y transbordos*: es el diferenciador que pide el Tema 4. Tiene las reglas más variables y sus errores causan los reclamos más frecuentes (B3.6, B6.1, B6.3).
+  - *Consolidación del recaudo*: sostiene la meta «cada peso llega a quien corresponde» y es la base de la distribución. Las disputas con los operadores son por conteo y atribución (B1.1, B3.6).
+- **De soporte:** tarjetas VAMOS y saldos, perfiles y descuentos, pago con tarjeta del banco, recepción de transacciones, ajustes y reclamos, y rutas y calendario. El pago con tarjeta es de soporte y no central, aunque es complejo, porque aplica una práctica del sector (el cobro agrupado) y la decisión de cuánto cobrar la toma Tarifas y transbordos.
+- **Genéricos:** usuarios internos y permisos, avisos y auditoría.
 
-<a id="alcance-y-reglas"></a>
+Cada dominio tiene responsable, datos y reglas propios; los dominios genéricos corresponden a capacidades comunes que pueden apoyarse en soluciones de mercado. Los eventos que justifican los puntos de corte se muestran en V6 y se detallan en `docs/final/dominios.md`.
 
-## Alcance y reglas
+### V7. Lenguaje ubicuo
+![V7](vistas/V7.png)
 
-| Elemento | Regla, evidencia o decisión validada | Fuente/estado |
+**Análisis.** Arriba está el glosario. Cada tarjeta tiene el término (*representation*), el objeto de negocio que nombra (realización) y su definición (*meaning*); el recuadro indica el contexto donde vale (D-20). Las definiciones precisan:
+- «Cobro agrupado»: al cierre del día **o** al superar un umbral (D-11).
+- «Reposición»: qué saldo se traslada y cuándo (D-28).
+- «Base de distribución»: es consolidada, no conciliada (D-25).
+- «Perfil especial»: los cuatro tipos (D-29).
+
+Abajo están los términos que **cambian de significado** según quién los use. Cada término se asocia a sus significados y cada significado al contexto o a la parte externa donde vale:
+- «Operador»: operador de transporte, concesionario o uso amplio.
+- «Viaje»: abordajes integrados, demanda por abordaje u origen-destino.
+- «Saldo»: saldo conocido, saldo en la tarjeta o pasivo contable.
+- «Tarifa»: correcta, aplicada o técnica.
+- «Recaudado» y «Cobro».
+- «Base»: la base **consolidada** que entrega la aplicación frente a la base **conciliada** que produce la conciliación (D-25).
+
+El glosario completo, con definición, contexto, ejemplo y fuente, está en [lenguaje_ubicuo.md](docs/final/lenguaje_ubicuo.md). Los nombres de los elementos de todas las vistas usan estos términos.
+
+---
+
+## 6. Agregados, comandos y eventos
+
+### V6. Un diagrama por dominio, en una sola vista
+![V6](vistas/V6.png)
+
+**Análisis.** La vista tiene **un diagrama por dominio**, como pide el enunciado: once bloques titulados con el dominio y su clasificación, que se pueden mover y ampliar por separado en Archi. Ninguna línea sale de su bloque: cuando un evento dispara un comando de otro agregado (política), ese comando se repite dentro del bloque en lila, con el nombre de su agregado. Son 16 agregados y cada uno muestra:
+- su **raíz**, que contiene sus entidades y sus objetos de valor (el **límite**);
+- los comandos que escriben en la raíz y los eventos que emiten;
+- las **políticas**, es decir, el comando que un evento dispara en otro agregado;
+- debajo, sus **invariantes**.
+
+**Reglas destacadas del diseño:**
+- **Cobro agrupado (V6, D-11).** Antes decía «un solo cobro por día», lo que contradecía el umbral que describió el experto (B3.3). Ahora:
+  - cada viaje entra en un solo cargo;
+  - hay un cargo al cierre del día o antes si se supera el umbral, hasta un máximo configurado;
+  - la suma del día no pasa el tope si se configura;
+  - un abordaje posterior a un cargo conserva el transbordo de su viaje.
+- **Consolidado (V6, D-26 y D-25).** Las recargas, el consumo y los resultados de cobro bancario van en líneas separadas que no se suman. La base de distribución se calcula solo desde el consumo atribuido; la conciliación externa devuelve sus diferencias como propuestas de ajuste.
+- **Tarjeta VAMOS (V6, D-28).** El saldo de la reposición es el saldo conocido a la hora del bloqueo efectivo, calculado cuando cerraron esos días.
+- **Perfil especial (V6, D-29).** El tipo es uno de los cuatro del Tema 4 y cada uno exige su certificación.
+- **Políticas entre agregados.**
+  - El movimiento de saldo lo dispara el abordaje tarificado (relación Tarifas → Tarjetas), y no la transacción aceptada, porque entre Recepción y Tarjetas no hay relación en el mapa de contextos.
+  - Las transacciones tardías también se tarifan.
+  - El consolidado se rehace solo si la transacción cae en un día ya cerrado.
+  - El validador comprueba que cada política entre contextos distintos tenga su relación en la V8.
+
+**Argumentación del alcance.** Cada agregado documenta por qué tiene ese límite:
+- La recarga se separa de la tarjeta porque nace en canales externos.
+- Cada transacción es su propio agregado, para recibir millones al día sin bloqueos.
+- El consolidado del día de servicio es la unidad de cierre diario.
+
+El detalle está en [agregados.md](docs/final/agregados.md). **Notación (D-19):** agrupación por agregado, objetos de datos para la raíz, las entidades y los objetos de valor, procesos de aplicación para los comandos y eventos de aplicación para los eventos (9_DDD diap. 18-23).
+
+---
+
+## 7. Mapa de contextos e interoperabilidad
+
+### V8. Mapa de contextos delimitados
+![V8](vistas/V8.png)
+
+**Análisis.** Hay un contexto delimitado por dominio, modelado como componente de aplicación con su **responsabilidad** (la nota de arriba), su interfaz y sus servicios (D-17, 9_DDD diap. 25-27). Los patrones son:
+- **[C/P] Cliente-proveedor:** entre los contextos centrales y los de soporte, como flujo del proveedor al consumidor. Por ejemplo:
+  - Recepción → Tarifas, con la transacción aceptada.
+  - Tarifas → Consolidación, con el abordaje con su tarifa.
+  - Tarjetas → Consolidación, con las recargas **aparte del consumo** (D-26).
+- **[OHS/PL] Servicio abierto con lenguaje publicado:** desde Rutas y calendario.
+- **[CF] Conformista:** hacia Usuarios internos y permisos.
+- **[OHS] Servicio abierto:** Avisos **sirve a** Pago con tarjeta del banco y a Perfiles. Es una relación «servida por» y no un flujo, porque son ellos los que le piden el envío cuando ocurre su evento (D-27).
+- **Núcleo compartido:** limitado a los identificadores (número de tarjeta, token, transacción y día de servicio).
+- **Auditoría:** es transversal para operaciones sensibles y correctivas. La vista omite sus relaciones para conservar la legibilidad; la cobertura exacta se especifica mediante SI2 y los contratos, por lo que no debe interpretarse que toda consulta genera el mismo tipo de registro.
+
+Las responsabilidades de cada relación están en [contextos.md](docs/final/contextos.md).
+
+### V9. Interoperabilidad y anticorrupción
+![V9](vistas/V9.png)
+
+**Análisis.** Es la capa anticorrupción completa. Para cada servicio externo, de SA01 a SA15, la vista muestra:
+- el componente externo y cada flujo con nombre y dirección explícitos; cuando existe intercambio en ambos sentidos se modela con relaciones separadas;
+- la interfaz anticorrupción, dentro del contexto dueño y asignada a su traductor;
+- el **servicio anticorrupción de la Fase 2** que ese traductor realiza, con su **contrato**;
+- el patrón de relación.
+
+Cada fila enlaza el sistema externo, la interfaz del contexto dueño, el traductor, el servicio anticorrupción de Fase 2, su contrato y el patrón. La tabla de [anticorrupción](docs/final/anticorrupcion.md) documenta 35 flujos dirigidos correspondientes a los 15 servicios SA01–SA15.
+
+En SA08 sale la base consolidada **sin conciliar**. Regresan por flujos separados las diferencias monetarias encontradas por la conciliación y las novedades de atribución que deben corregirse. Fuera de la aplicación, la secuencia es conciliar, liquidar y ordenar o ejecutar el pago a operadores (D-04, D-25, S-09).
+
+**Argumentación.** El patrón depende de quién manda en el formato, y es coherente con la Fase 2:
+- **Capa anticorrupción:** para los formatos propietarios de los equipos, la red, las certificadoras y el sistema legado.
+- **Conformista:** con la autoridad, el adquirente y la pasarela.
+- **Lenguaje publicado:** hacia el área financiera, la liquidación y los operadores.
+
+El formato y el protocolo de cada intercambio están en su contrato (D-24).
+
+---
+
+## 8. Bounded Context Canvas
+
+### V11. Canvas del contexto Tarifas y transbordos
+![V11](vistas/V11.png)
+
+**Análisis.** El canvas está en una página con las secciones de la plantilla de ddd-crew (9_DDD diap. 34-35):
+- Propósito, clasificación estratégica (central, ingreso y cumplimiento, hecho a la medida) y roles (contexto de ejecución y de especificación).
+- Comunicación entrante y saliente: colaborador y mensaje, con su tipo.
+- Lenguaje ubicuo, decisiones de negocio, supuestos, métricas de verificación y preguntas abiertas.
+
+**Argumentación.** Se eligió este contexto porque es central, concentra las reglas que pide el Tema 4 y tiene más comunicación entrante y saliente (D-18). Para construirlo en Archi (D-22), las secciones son agrupaciones y se reutilizan elementos del modelo: el componente, los eventos y comandos de la V6, los términos de la V7 y los colaboradores de la V8 y la V9. El propósito, la clasificación, los roles y las métricas son *meaning*; las decisiones son *constraint*, y los supuestos y las preguntas son *assessment*.
+
+---
+
+## 9. Trazabilidad vertical
+
+### V10. De la meta al componente
+![V10](vistas/V10.png)
+
+**Análisis.** La cadena es meta ← resultado ← requerimiento ← capacidad ← servicio de negocio ← servicio de aplicación ← contexto delimitado. Todas son relaciones de realización visibles y cada columna solo se conecta con la siguiente. Una sola vista cubre los doce requerimientos y **los once contextos**.
+
+Los once contextos principales llegan a una meta. Rutas y calendario participa en recepción y consolidación; Avisos llega por REQ12; Auditoría y soportes llega por REQ07 y REQ11. Los componentes externos y los adaptadores ACL de V9 no son realizadores directos de metas internas y por eso no aparecen como destino final de esta vista.
+
+La matriz completa está en [trazabilidad.md](docs/final/trazabilidad.md). El validador comprueba que **cada** contexto llega a una meta.
+
+---
+
+## 10. Decisiones y supuestos
+
+El registro completo está en [decisiones_y_supuestos.md](docs/final/decisiones_y_supuestos.md): 30 decisiones (D-01 a D-30), 12 supuestos y los parámetros sin valor. Las decisiones que más cambian el diseño son:
+
+| Código | Decisión | Por qué |
 |---|---|---|
-| Reglas de negocio | PENDIENTE de entrevista y validación del equipo | PENDIENTE |
-| Inclusión de servicios | PENDIENTE; justificar cada servicio incluido | PENDIENTE |
-| Exclusión de servicios | PENDIENTE; justificar cada exclusión | PENDIENTE |
-| Límites del sistema y actores | PENDIENTE de validar con el enunciado y el equipo | PENDIENTE |
+| D-01 | La aplicación es la plataforma de recaudo del ente gestor; los equipos los conserva su proveedor | El Tema 4 pide las funciones del sistema central y dice que el software «recibe las transacciones» |
+| D-04 | La conciliación financiera, la liquidación contractual y el pago a operadores quedan fuera; la aplicación entrega la base consolidada | Tema 4: consolidación «como base para». La aplicación consolida; el sistema externo concilia y liquida, y la fiduciaria ejecuta el pago (B3.1, B3.5, B2.7). El cobro bancario al pasajero sí está incluido. |
+| D-05 | La autoridad autoriza; el ente gestor registra, versiona y publica; el equipo calcula y aplica localmente; la aplicación central recalcula, compara y registra diferencias | Distingue la validación inmediata, incluida la contingencia temporal sin conectividad, de la verificación central exigida por el Tema 4 (B4.4, B9.13). |
+| D-02 | El metro es un modo integrado con su propia ACL | El Tema 4 incluye los tres modos; el experto supone un sistema propio del metro |
+| D-10 | La tarjeta bancaria paga tarifa plena y sí tiene integración | B2.5, B3.3 |
+| D-21 | Las reglas variables son parámetros sin valor inventado | Lo que el experto dio como supuesto o con certeza baja |
+| D-30 | Exactamente una vista para cada V1–V11; V6 contiene once bloques independientes, uno por dominio | Cumple la organización compacta del enunciado y permite recorrer el modelo durante la sustentación. |
 
-<a id="servicios-y-contratos"></a>
+---
 
-## Servicios y contratos
+## 11. Validación, fuentes y limitaciones
 
-**Contract First:** contratos por definir cuando el equipo valide los servicios y sus consumidores/proveedores.
+**Cómo se regenera y se valida** (desde la raíz, con Archi 5.x instalado):
 
-| Servicio/versión | Propósito | Consumidor/proveedor | Operaciones y esquemas | Errores, reglas y seguridad | Estado |
-|---|---|---|---|---|---|
-| PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE |
+```bash
+R=$(ls -d /Applications/Archi.app/Contents/Eclipse/plugins/com.archimatetool.model_*/model/relationships.xml)
+python3 -I herramientas/generar.py "$R"          # modelo, tablas, contratos y revisión de legibilidad
+python3 -I herramientas/exportar_vistas.py       # Archi abre el modelo y exporta las vistas a /vistas
+python3 -I herramientas/validar_modelo.py "$R"   # validación independiente → docs/final/validacion.md
+```
 
-<a id="lenguaje-ubicuo"></a>
+Si el equipo edita el modelo en Archi, **no** debe volver a ejecutar `generar.py`, porque sobrescribe los cambios.
 
-## Lenguaje ubicuo
+**Comprobaciones ejecutadas en esta versión:**
+- Cada relación se validó contra la tabla oficial de relaciones de ArchiMate 3.2 que trae Archi (`relationships.xml`) al generarla.
+- Archi 5.x cargó el modelo y exportó las once vistas que se encuentran en `vistas/`.
+- El validador independiente superó **<!--NOK-->38/38<!--/NOK-->** comprobaciones estructurales y reglas de contenido enumeradas en [validacion.md](docs/final/validacion.md). Incluye integridad de referencias, validez de relaciones, organización V1–V11, cobertura de contratos, trazabilidad, imágenes y referencias a la entrevista; no sustituye una revisión semántica exhaustiva de todas las decisiones.
+- La revisión de legibilidad del generador no produjo mensajes en `herramientas/salidas/legibilidad.txt`; es un control heurístico y no sustituye la inspección visual ni el validador interactivo de Archi.
+- Con la geometría almacenada y el supuesto de anclas ortogonales, el validador estimó 0 tramos oblicuos, 0 cruces interiores y 0 solapamientos colineales según su algoritmo. El resultado puede variar si se cambia la preferencia de anclaje en Archi.
+- La exportación de las once imágenes está comprobada; la revisión visual manual no forma parte de las 38 pruebas automatizadas.
 
-| Término | Definición acordada | Contexto | Ambigüedades/ejemplos | Fuente y validación |
-|---|---|---|---|---|
-| PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE |
+**Limitaciones reales:**
+- **Validador interactivo de Archi.** La línea de comandos no ejecuta el validador de estilo de la interfaz gráfica. No existe en esta copia un reporte conservado de esa ejecución; debe abrirse el modelo en Archi y comprobarse mediante *Tools* antes de la entrega.
+- **Normas.** Solo se contrastaron las dos que el diseño usa como restricción (Ley 1581 de 2012 y Ley 1755 de 2015), con copias públicas de su texto. Las demás que citó el experto no se contrastaron y no se usan como reglas.
+- **Entrevista.** No hubo una segunda ronda de validación con el experto. Por eso lo que él marcó como supuesto es configurable (D-21).
+- **Diapositivas.** De 9_DDD se leyó el texto completo de las diapositivas 1-50 y se revisaron visualmente las diapositivas 6-16 y 23-35, donde el contenido está en imágenes. De 7_SOA se usaron las diapositivas 20, 28, 33, 35 y 44-47, y de 6_TOGAF las diapositivas desde la 21. En las diapositivas 25-28 de 9_DDD no aparecen los nombres de los patrones de relación entre contextos; se tomaron del enunciado (Fase 5).
+- **Vistas grandes.** Varias son anchas o altas (V1, V3, V4, V6, V7, V8 y V10); se leen mejor en Archi, con zoom, o abriendo la imagen.
+- **Anclas de las líneas.** Las líneas salen rectas con la preferencia por defecto de Archi («anclas ortogonales»). Si alguien desactiva esa preferencia en su Archi, los tramos junto a las cajas se ven levemente inclinados.
+- **Uso de IA.** La Fase 0 usó un experto simulado. La conversación completa conserva además turnos posteriores en los que se solicitaron artefactos de diseño; estos se separaron de los hallazgos de negocio en el análisis de la entrevista. El equipo debe asumir y poder sustentar las decisiones registradas, sin presentar esos turnos como evidencia del experto.
 
-<a id="decisiones-y-supuestos"></a>
+---
 
-## Decisiones y supuestos
+## 12. Tabla de aportes
 
-No se registran decisiones del equipo en esta entrega. Completar la tabla con autoría, fecha y evidencia verificables; distinguir decisiones acordadas de supuestos aún por validar.
+El repositorio fue publicado según el estado informado por el equipo, pero esta copia local no contiene el directorio `.git`, remotos ni historial. Por tanto, desde estos archivos no es posible verificar autores, fechas o contribuciones individuales mediante commits. La tabla debe completarse desde el clon que conserve el historial; no se atribuyen aportes que esta copia no demuestra.
 
-| ID | Decisión o supuesto | Alternativas/forma de validación | Responsable y fecha | Evidencia | Estado |
-|---|---|---|---|---|---|
-| PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE |
-
-<a id="trazabilidad"></a>
-
-## Trazabilidad
-
-| Meta/requisito y fuente | Capacidad | Servicio | Componente | Vista/evidencia | Brecha/estado |
-|---|---|---|---|---|---|
-| PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE |
-
-<a id="aportes-del-equipo"></a>
-
-## Aportes del equipo
-
-Atribuir aportes usando commits, revisiones u otra evidencia acordada por el equipo. Un commit acredita un cambio en el repositorio, no necesariamente toda la participación académica.
-
-| Integrante | Aporte/artefacto | Commit/revisión | Fecha | Evidencia y validación |
-|---|---|---|---|---|
-| PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE | PENDIENTE |
-
-<a id="modelo-y-exportaciones"></a>
-
-## Modelo y exportaciones
-
-El modelo canónico es [`modelo/recaudo-multimodal.archimate`](modelo/recaudo-multimodal.archimate). Se conserva el archivo existente sin cambios de contenido. El equipo debe revisar el modelo en Archi y comprobar compatibilidad, consistencia, semántica y correspondencia con el enunciado vigente antes de marcarlo como validado.
-
-Exportar las vistas PNG desde este modelo y añadir solo archivos reales. No hay exportaciones PNG incorporadas actualmente; este README no enlaza imágenes inexistentes. Mantener los nombres V01–V11 y registrar qué versión del modelo produjo cada exportación.
-
-<a id="checklist-de-entrega"></a>
-
-
-## Checklist de entrega
-
-- [ ] Entrevista documentada y analizada con autorización.
-- [ ] Modelo ArchiMate único validado por el equipo.
-- [ ] Todas las vistas exportadas desde el modelo.
-- [ ] Decisiones arquitectónicas justificadas con evidencia.
-- [ ] Contratos de servicios documentados.
-- [ ] Tabla de aportes verificable.
-- [x] README con índice navegable.
-- [x] Repositorio publicado en GitHub.
-- [ ] Sustentación preparada.
-- [ ] Sustentación grabada en Teams.
-
-<a id="principios-de-documentación"></a>
-
-## Principios de documentación
-
-- Mantener este README como única fuente documental del repositorio.
-- Escribir en español técnico y claro.
-- Identificar explícitamente todo lo pendiente.
-- No declarar terminado un entregable sin revisión y evidencia.
-- No generar con IA mapas de capacidades, dominios, agregados, contextos ni vistas evaluadas.
-- Proteger entrevistas, datos personales y materiales académicos privados; incorporar solo archivos autorizados.
+| Integrante | Aportes verificables en esta copia | Evidencia disponible |
+|---|---|---|
+| Equipo | No atribuibles individualmente | No hay metadatos Git locales; se requiere el historial del repositorio publicado. |
