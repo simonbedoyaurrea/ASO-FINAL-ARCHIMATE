@@ -4,7 +4,7 @@
 
 > **Modelo único y definitivo:** [`modelo/recaudo_tema4.archimate`](modelo/recaudo_tema4.archimate). Se abre en Archi 5.x; sus once vistas V1–V11 están directamente en la carpeta *Views*, sin subcarpetas.
 > Integra todas las fases: 799 elementos, 1474 relaciones y 11 vistas.
-
+> Las carpetas `fase 1/` y `fase 2/` son **antecedentes** (borradores anteriores) y no forman parte de la entrega.
 
 ## Índice
 
@@ -31,7 +31,7 @@
 | Ruta | Contenido |
 |---|---|
 | [`modelo/recaudo_tema4.archimate`](modelo/recaudo_tema4.archimate) | Modelo ArchiMate único y definitivo (Archi 5.x, ArchiMate 3.2) |
-| [`vistas/`](vistas/) | Las 11 vistas exportadas por Archi (un PNG por vista, con el código de la vista como nombre) |
+| [`vistas/`](vistas/) | Las 11 vistas exportadas por Archi en formato SVG |
 | [`entrevista/`](entrevista/) | [Conversación íntegra](entrevista/conversacion_fase0_completa.txt), [instrucción de rol](entrevista/instruccion_de_rol.md), [guion](entrevista/guion.md), [análisis de hallazgos](entrevista/analisis_hallazgos.md), [índice de referencias](entrevista/indice_referencias.md) y el Word original con capturas |
 | [`docs/final/`](docs/final/) | Documentos completos: [inclusión y exclusión](docs/final/inclusion_exclusion.md), [anticorrupción](docs/final/anticorrupcion.md), [contratos](docs/final/contratos_servicios.md), [dominios](docs/final/dominios.md), [lenguaje ubicuo](docs/final/lenguaje_ubicuo.md), [agregados e invariantes](docs/final/agregados.md), [contextos y patrones](docs/final/contextos.md), [trazabilidad](docs/final/trazabilidad.md), [decisiones y supuestos](docs/final/decisiones_y_supuestos.md) y [validación](docs/final/validacion.md) |
 | [`herramientas/`](herramientas/) | Catálogo de datos y scripts que generan el modelo, las tablas y los contratos, exportan las vistas y validan el modelo (ver §11) |
@@ -95,7 +95,9 @@ El [análisis de hallazgos](entrevista/analisis_hallazgos.md) clasifica 44 halla
 ## 2. Motivación
 
 ### V1. Por qué existe la aplicación: de los interesados a los requerimientos
-![V1](vistas/V1.png)
+[![V1 — Motivación: de los interesados a los requerimientos](vistas/V1%20%C2%B7%20Motivacio%CC%81n%3A%20de%20los%20interesados%20a%20los%20requerimientos.svg)](vistas/V1%20%C2%B7%20Motivacio%CC%81n%3A%20de%20los%20interesados%20a%20los%20requerimientos.svg)
+
+[Abrir V1 en SVG](vistas/V1%20%C2%B7%20Motivacio%CC%81n%3A%20de%20los%20interesados%20a%20los%20requerimientos.svg)
 
 **Análisis.** Una sola vista recorre toda la motivación, de izquierda a derecha:
 - **Interesados (B1.1) e impulsores (B1.2).**
@@ -123,7 +125,9 @@ Juntar todo en una vista muestra la cadena completa de la motivación que pide e
 ## 3. Mapa de capacidades y proceso E2E
 
 ### V2. Mapa de capacidades del negocio
-![V2](vistas/V2.png)
+[![V2 — Mapa de capacidades del negocio](vistas/V2%20%C2%B7%20Mapa%20de%20capacidades%20del%20negocio.svg)](vistas/V2%20%C2%B7%20Mapa%20de%20capacidades%20del%20negocio.svg)
+
+[Abrir V2 en SVG](vistas/V2%20%C2%B7%20Mapa%20de%20capacidades%20del%20negocio.svg)
 
 **Análisis.** El mapa tiene 15 grupos de nivel 1 y 57 capacidades de nivel 2, estratégicas, misionales y de apoyo, con la paleta de 7_SOA diap. 35. El impacto se marca así:
 - **Alto** (borde naranja): la capacidad la realiza la aplicación. Son 13.
@@ -137,7 +141,9 @@ Los **recursos** (café claro) van dentro de la capacidad a la que se asignan; A
 - **Dónde actúa la aplicación:** se ve por el borde. La relación «la aplicación realiza la capacidad» está en el modelo y se recorre en la V10.
 
 ### V3. Cadena de valor, proceso E2E y dónde se ubica la aplicación
-![V3](vistas/V3.png)
+[![V3 — Cadena de valor y proceso E2E: dónde se ubica la aplicación](vistas/V3%20%C2%B7%20Cadena%20de%20valor%20y%20proceso%20E2E%3A%20do%CC%81nde%20se%20ubica%20la%20aplicacio%CC%81n.svg)](vistas/V3%20%C2%B7%20Cadena%20de%20valor%20y%20proceso%20E2E%3A%20do%CC%81nde%20se%20ubica%20la%20aplicacio%CC%81n.svg)
+
+[Abrir V3 en SVG](vistas/V3%20%C2%B7%20Cadena%20de%20valor%20y%20proceso%20E2E%3A%20do%CC%81nde%20se%20ubica%20la%20aplicacio%CC%81n.svg)
 
 **Análisis.**
 - **Arriba, la cadena de valor:** cada paso sube a la etapa que realiza.
@@ -169,7 +175,9 @@ Los **recursos** (café claro) van dentro de la capacidad a la que se asignan; A
 Hay seis capas de servicio reales (7_SOA diap. 20 y 28); el proceso E2E está encima y **no se cuenta como capa**. En total son 84 servicios: 74 incluidos y 10 excluidos. Están en la [tabla de inclusión y exclusión](docs/final/inclusion_exclusion.md), con la justificación y la fuente de cada uno.
 
 ### V4. Seis capas, qué entra y qué no, contratos y quién presta los servicios
-![V4](vistas/V4.png)
+[![V4 — Descomposición de servicios: seis capas, alcance y contratos](vistas/V4%20%C2%B7%20Descomposicio%CC%81n%20de%20servicios%3A%20seis%20capas%2C%20alcance%20y%20contratos.svg)](vistas/V4%20%C2%B7%20Descomposicio%CC%81n%20de%20servicios%3A%20seis%20capas%2C%20alcance%20y%20contratos.svg)
+
+[Abrir V4 en SVG](vistas/V4%20%C2%B7%20Descomposicio%CC%81n%20de%20servicios%3A%20seis%20capas%2C%20alcance%20y%20contratos.svg)
 
 **Análisis.**
 - **Izquierda, el árbol de servicios:** pasos del proceso → capa 1 (plataforma) → capa 2 (dominio) → **contrato** de cada servicio de dominio (Contract First, D-13).
@@ -205,7 +213,9 @@ A partir de aquí el diseño pasa a la capa de aplicación. **Cómo se extrajero
 La tabla de eventos por dominio y los argumentos completos están en [dominios.md](docs/final/dominios.md).
 
 ### V5. Dominios y su clasificación
-![V5](vistas/V5.png)
+[![V5 — Dominios y su clasificación](vistas/V5%20%C2%B7%20Dominios%20y%20su%20clasificaci%C3%B3n.svg)](vistas/V5%20%C2%B7%20Dominios%20y%20su%20clasificaci%C3%B3n.svg)
+
+[Abrir V5 en SVG](vistas/V5%20%C2%B7%20Dominios%20y%20su%20clasificaci%C3%B3n.svg)
 
 **Análisis y argumentación (9_DDD diap. 11).** Cada dominio muestra sus objetos de negocio y el contexto que lo implementa.
 - **Centrales:**
@@ -217,7 +227,9 @@ La tabla de eventos por dominio y los argumentos completos están en [dominios.m
 Cada dominio tiene responsable, datos y reglas propios; los dominios genéricos corresponden a capacidades comunes que pueden apoyarse en soluciones de mercado. Los eventos que justifican los puntos de corte se muestran en V6 y se detallan en `docs/final/dominios.md`.
 
 ### V7. Lenguaje ubicuo
-![V7](vistas/V7.png)
+[![V7 — Lenguaje ubicuo: glosario por contexto y palabras con varios significados](vistas/V7%20%C2%B7%20Lenguaje%20ubicuo%3A%20glosario%20por%20contexto%20y%20palabras%20con%20varios%20significados.svg)](vistas/V7%20%C2%B7%20Lenguaje%20ubicuo%3A%20glosario%20por%20contexto%20y%20palabras%20con%20varios%20significados.svg)
+
+[Abrir V7 en SVG](vistas/V7%20%C2%B7%20Lenguaje%20ubicuo%3A%20glosario%20por%20contexto%20y%20palabras%20con%20varios%20significados.svg)
 
 **Análisis.** Arriba está el glosario. Cada tarjeta tiene el término (*representation*), el objeto de negocio que nombra (realización) y su definición (*meaning*); el recuadro indica el contexto donde vale (D-20). Las definiciones precisan:
 - «Cobro agrupado»: al cierre del día **o** al superar un umbral (D-11).
@@ -240,7 +252,9 @@ El glosario completo, con definición, contexto, ejemplo y fuente, está en [len
 ## 6. Agregados, comandos y eventos
 
 ### V6. Un diagrama por dominio, en una sola vista
-![V6](vistas/V6.png)
+[![V6 — Agregados, comandos y eventos: un diagrama por dominio](vistas/V6%20%C2%B7%20Agregados%2C%20comandos%20y%20eventos%3A%20un%20diagrama%20por%20dominio.svg)](vistas/V6%20%C2%B7%20Agregados%2C%20comandos%20y%20eventos%3A%20un%20diagrama%20por%20dominio.svg)
+
+[Abrir V6 en SVG](vistas/V6%20%C2%B7%20Agregados%2C%20comandos%20y%20eventos%3A%20un%20diagrama%20por%20dominio.svg)
 
 **Análisis.** La vista tiene **un diagrama por dominio**, como pide el enunciado: once bloques titulados con el dominio y su clasificación, que se pueden mover y ampliar por separado en Archi. Ninguna línea sale de su bloque: cuando un evento dispara un comando de otro agregado (política), ese comando se repite dentro del bloque en lila, con el nombre de su agregado. Son 16 agregados y cada uno muestra:
 - su **raíz**, que contiene sus entidades y sus objetos de valor (el **límite**);
@@ -275,7 +289,9 @@ El detalle está en [agregados.md](docs/final/agregados.md). **Notación (D-19):
 ## 7. Mapa de contextos e interoperabilidad
 
 ### V8. Mapa de contextos delimitados
-![V8](vistas/V8.png)
+[![V8 — Mapa de contextos delimitados](vistas/V8%20%C2%B7%20Mapa%20de%20contextos%20delimitados.svg)](vistas/V8%20%C2%B7%20Mapa%20de%20contextos%20delimitados.svg)
+
+[Abrir V8 en SVG](vistas/V8%20%C2%B7%20Mapa%20de%20contextos%20delimitados.svg)
 
 **Análisis.** Hay un contexto delimitado por dominio, modelado como componente de aplicación con su **responsabilidad** (la nota de arriba), su interfaz y sus servicios (D-17, 9_DDD diap. 25-27). Los patrones son:
 - **[C/P] Cliente-proveedor:** entre los contextos centrales y los de soporte, como flujo del proveedor al consumidor. Por ejemplo:
@@ -291,7 +307,9 @@ El detalle está en [agregados.md](docs/final/agregados.md). **Notación (D-19):
 Las responsabilidades de cada relación están en [contextos.md](docs/final/contextos.md).
 
 ### V9. Interoperabilidad y anticorrupción
-![V9](vistas/V9.png)
+[![V9 — Interoperabilidad y anticorrupción](vistas/V9%20%C2%B7%20Interoperabilidad%20y%20anticorrupci%C3%B3n.svg)](vistas/V9%20%C2%B7%20Interoperabilidad%20y%20anticorrupci%C3%B3n.svg)
+
+[Abrir V9 en SVG](vistas/V9%20%C2%B7%20Interoperabilidad%20y%20anticorrupci%C3%B3n.svg)
 
 **Análisis.** Es la capa anticorrupción completa. Para cada servicio externo, de SA01 a SA15, la vista muestra:
 - el componente externo y cada flujo con nombre y dirección explícitos; cuando existe intercambio en ambos sentidos se modela con relaciones separadas;
@@ -315,7 +333,9 @@ El formato y el protocolo de cada intercambio están en su contrato (D-24).
 ## 8. Bounded Context Canvas
 
 ### V11. Canvas del contexto Tarifas y transbordos
-![V11](vistas/V11.png)
+[![V11 — Bounded Context Canvas: Tarifas y transbordos](vistas/V11%20%C2%B7%20Bounded%20Context%20Canvas%3A%20Tarifas%20y%20transbordos.svg)](vistas/V11%20%C2%B7%20Bounded%20Context%20Canvas%3A%20Tarifas%20y%20transbordos.svg)
+
+[Abrir V11 en SVG](vistas/V11%20%C2%B7%20Bounded%20Context%20Canvas%3A%20Tarifas%20y%20transbordos.svg)
 
 **Análisis.** El canvas está en una página con las secciones de la plantilla de ddd-crew (9_DDD diap. 34-35):
 - Propósito, clasificación estratégica (central, ingreso y cumplimiento, hecho a la medida) y roles (contexto de ejecución y de especificación).
@@ -329,7 +349,9 @@ El formato y el protocolo de cada intercambio están en su contrato (D-24).
 ## 9. Trazabilidad vertical
 
 ### V10. De la meta al componente
-![V10](vistas/V10.png)
+[![V10 — Trazabilidad vertical: de cada requerimiento a sus componentes (REQ01-REQ12)](vistas/V10%20%C2%B7%20Trazabilidad%20vertical%3A%20de%20cada%20requerimiento%20a%20sus%20componentes%20%28REQ01-REQ12%29.svg)](vistas/V10%20%C2%B7%20Trazabilidad%20vertical%3A%20de%20cada%20requerimiento%20a%20sus%20componentes%20%28REQ01-REQ12%29.svg)
+
+[Abrir V10 en SVG](vistas/V10%20%C2%B7%20Trazabilidad%20vertical%3A%20de%20cada%20requerimiento%20a%20sus%20componentes%20%28REQ01-REQ12%29.svg)
 
 **Análisis.** La cadena es meta ← resultado ← requerimiento ← capacidad ← servicio de negocio ← servicio de aplicación ← contexto delimitado. Todas son relaciones de realización visibles y cada columna solo se conecta con la siguiente. Una sola vista cubre los doce requerimientos y **los once contextos**.
 
@@ -352,45 +374,3 @@ El registro completo está en [decisiones_y_supuestos.md](docs/final/decisiones_
 | D-10 | La tarjeta bancaria paga tarifa plena y sí tiene integración | B2.5, B3.3 |
 | D-21 | Las reglas variables son parámetros sin valor inventado | Lo que el experto dio como supuesto o con certeza baja |
 | D-30 | Exactamente una vista para cada V1–V11; V6 contiene once bloques independientes, uno por dominio | Cumple la organización compacta del enunciado y permite recorrer el modelo durante la sustentación. |
-
----
-
-## 11. Validación, fuentes y limitaciones
-
-**Cómo se regenera y se valida** (desde la raíz, con Archi 5.x instalado):
-
-```bash
-R=$(ls -d /Applications/Archi.app/Contents/Eclipse/plugins/com.archimatetool.model_*/model/relationships.xml)
-python3 -I herramientas/generar.py "$R"          # modelo, tablas, contratos y revisión de legibilidad
-python3 -I herramientas/exportar_vistas.py       # Archi abre el modelo y exporta las vistas a /vistas
-python3 -I herramientas/validar_modelo.py "$R"   # validación independiente → docs/final/validacion.md
-```
-
-Si el equipo edita el modelo en Archi, **no** debe volver a ejecutar `generar.py`, porque sobrescribe los cambios.
-
-**Comprobaciones ejecutadas en esta versión:**
-- Cada relación se validó contra la tabla oficial de relaciones de ArchiMate 3.2 que trae Archi (`relationships.xml`) al generarla.
-- Archi 5.x cargó el modelo y exportó las once vistas que se encuentran en `vistas/`.
-- El validador independiente superó **<!--NOK-->38/38<!--/NOK-->** comprobaciones estructurales y reglas de contenido enumeradas en [validacion.md](docs/final/validacion.md). Incluye integridad de referencias, validez de relaciones, organización V1–V11, cobertura de contratos, trazabilidad, imágenes y referencias a la entrevista; no sustituye una revisión semántica exhaustiva de todas las decisiones.
-- La revisión de legibilidad del generador no produjo mensajes en `herramientas/salidas/legibilidad.txt`; es un control heurístico y no sustituye la inspección visual ni el validador interactivo de Archi.
-- Con la geometría almacenada y el supuesto de anclas ortogonales, el validador estimó 0 tramos oblicuos, 0 cruces interiores y 0 solapamientos colineales según su algoritmo. El resultado puede variar si se cambia la preferencia de anclaje en Archi.
-- La exportación de las once imágenes está comprobada; la revisión visual manual no forma parte de las 38 pruebas automatizadas.
-
-**Limitaciones reales:**
-- **Validador interactivo de Archi.** La línea de comandos no ejecuta el validador de estilo de la interfaz gráfica. No existe en esta copia un reporte conservado de esa ejecución; debe abrirse el modelo en Archi y comprobarse mediante *Tools* antes de la entrega.
-- **Normas.** Solo se contrastaron las dos que el diseño usa como restricción (Ley 1581 de 2012 y Ley 1755 de 2015), con copias públicas de su texto. Las demás que citó el experto no se contrastaron y no se usan como reglas.
-- **Entrevista.** No hubo una segunda ronda de validación con el experto. Por eso lo que él marcó como supuesto es configurable (D-21).
-- **Diapositivas.** De 9_DDD se leyó el texto completo de las diapositivas 1-50 y se revisaron visualmente las diapositivas 6-16 y 23-35, donde el contenido está en imágenes. De 7_SOA se usaron las diapositivas 20, 28, 33, 35 y 44-47, y de 6_TOGAF las diapositivas desde la 21. En las diapositivas 25-28 de 9_DDD no aparecen los nombres de los patrones de relación entre contextos; se tomaron del enunciado (Fase 5).
-- **Vistas grandes.** Varias son anchas o altas (V1, V3, V4, V6, V7, V8 y V10); se leen mejor en Archi, con zoom, o abriendo la imagen.
-- **Anclas de las líneas.** Las líneas salen rectas con la preferencia por defecto de Archi («anclas ortogonales»). Si alguien desactiva esa preferencia en su Archi, los tramos junto a las cajas se ven levemente inclinados.
-- **Uso de IA.** La Fase 0 usó un experto simulado. La conversación completa conserva además turnos posteriores en los que se solicitaron artefactos de diseño; estos se separaron de los hallazgos de negocio en el análisis de la entrevista. El equipo debe asumir y poder sustentar las decisiones registradas, sin presentar esos turnos como evidencia del experto.
-
----
-
-## 12. Tabla de aportes
-
-El repositorio fue publicado según el estado informado por el equipo, pero esta copia local no contiene el directorio `.git`, remotos ni historial. Por tanto, desde estos archivos no es posible verificar autores, fechas o contribuciones individuales mediante commits. La tabla debe completarse desde el clon que conserve el historial; no se atribuyen aportes que esta copia no demuestra.
-
-| Integrante | Aportes verificables en esta copia | Evidencia disponible |
-|---|---|---|
-| Equipo | No atribuibles individualmente | No hay metadatos Git locales; se requiere el historial del repositorio publicado. |
