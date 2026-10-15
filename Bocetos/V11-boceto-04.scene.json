@@ -1,0 +1,277 @@
+{
+  "width": 1800,
+  "height": 970,
+  "title": "V11 · Canvas — Tarifas y transbordos",
+  "cards": [
+    {
+      "x": 48,
+      "y": 120,
+      "width": 1704,
+      "height": 90,
+      "title": "Propósito · clasificación · rol",
+      "body": "Calcular tarifa e integración por validación. Contexto central: versiona reglas y calcula importes. Perfiles, saldos y cobros pertenecen a otros contextos.",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 48,
+      "y": 270,
+      "width": 520,
+      "height": 98,
+      "title": "Ente gestor",
+      "body": "C · Registrar acto y vigencia. La autoridad define; el gestor registra.",
+      "fill": "#edf0f2",
+      "size": 13,
+      "kind": null
+    },
+    {
+      "x": 632,
+      "y": 270,
+      "width": 520,
+      "height": 98,
+      "title": "Versionar reglas",
+      "body": "Conservar tarifas y reglas de integración versionadas.",
+      "fill": "#f7dfaa",
+      "size": 13,
+      "kind": null
+    },
+    {
+      "x": 1216,
+      "y": 270,
+      "width": 536,
+      "height": 98,
+      "title": "Equipos externos",
+      "body": "E · Versión vigente a equipos mediante ACL; no administrar hardware.",
+      "fill": "#dceef3",
+      "size": 13,
+      "kind": null
+    },
+    {
+      "x": 48,
+      "y": 380,
+      "width": 520,
+      "height": 98,
+      "title": "Recepción",
+      "body": "E · Validación: ID, instante, modo, medio y viaje. C/P.",
+      "fill": "#edf0f2",
+      "size": 13,
+      "kind": null
+    },
+    {
+      "x": 632,
+      "y": 380,
+      "width": 520,
+      "height": 98,
+      "title": "Calcular tarifa",
+      "body": "C · Calcular importe con regla, perfil e integración vigentes.",
+      "fill": "#f7dfaa",
+      "size": 13,
+      "kind": null
+    },
+    {
+      "x": 1216,
+      "y": 380,
+      "width": 536,
+      "height": 98,
+      "title": "VAMOS / Banco / Consolidación",
+      "body": "E · Tarifa a VAMOS/banco y Consolidación. No concilia. C/P.",
+      "fill": "#dceef3",
+      "size": 13,
+      "kind": null
+    },
+    {
+      "x": 48,
+      "y": 505,
+      "width": 1704,
+      "height": 90,
+      "title": "Consultas y contrato",
+      "body": "Consulta tarifa/regla: responde al solicitante, sin cobrar. Consulta Perfiles (C/P) y Planeación (C/P + ACL). Entrada: validación y contexto. Salida: importe, regla, versión y estado. Recalcular no vuelve a cobrar.",
+      "fill": "#dceef3",
+      "size": 12,
+      "kind": null
+    },
+    {
+      "x": 48,
+      "y": 620,
+      "width": 552,
+      "height": 170,
+      "title": "Lenguaje ubicuo",
+      "body": "Validación: acceso registrado.\nTransbordo: continuación integrada por una regla.\nPerfil vigente: elegibilidad en el instante del viaje.\nTarifa: importe central, no tarifa técnica del operador.",
+      "fill": "#fff0c7",
+      "size": 13,
+      "kind": null
+    },
+    {
+      "x": 624,
+      "y": 620,
+      "width": 552,
+      "height": 170,
+      "title": "Decisiones de negocio",
+      "body": "Autoridad define; gestor registra.\nPerfiles valida; Tarifas calcula.\nVAMOS mueve saldo; banco cobra.\nConsolidación agrupa, no concilia.\nCorregir con rastro, sin editar cobros históricos.",
+      "fill": "#f7dfaa",
+      "size": 13,
+      "kind": null
+    },
+    {
+      "x": 1200,
+      "y": 620,
+      "width": 552,
+      "height": 170,
+      "title": "Supuestos y configuración",
+      "body": "ID estable y vigencia histórica disponibles. Importes y ventanas vienen de reglas autorizadas. Sin datos suficientes: «no tarifable», con causa.",
+      "fill": "#edf0f2",
+      "size": 13,
+      "kind": null
+    },
+    {
+      "x": 48,
+      "y": 815,
+      "width": 840,
+      "height": 90,
+      "title": "Verificación",
+      "body": "Exactitud por modo, medio, perfil y transbordo; causas de no tarifables; diferencias con equipos; tiempo de cálculo.",
+      "fill": "#dceef3",
+      "size": 12,
+      "kind": null
+    },
+    {
+      "x": 912,
+      "y": 815,
+      "width": 840,
+      "height": 90,
+      "title": "Límites",
+      "body": "Fuera: dispositivos, certificación externa, saldos, cobro bancario, conciliación y pago a operadores.",
+      "fill": "#edf0f2",
+      "size": 12,
+      "kind": null
+    }
+  ],
+  "texts": [
+    {
+      "x": 48,
+      "y": 42,
+      "text": "V11 · Canvas — Tarifas y transbordos",
+      "size": 24,
+      "bold": true,
+      "color": "#283239",
+      "anchor": "start"
+    },
+    {
+      "x": 48,
+      "y": 71,
+      "text": "Tema 4 · Un contexto principal en una página",
+      "size": 14,
+      "bold": false,
+      "color": "#525d64",
+      "anchor": "start"
+    },
+    {
+      "x": 48,
+      "y": 245,
+      "text": "Entradas",
+      "size": 14,
+      "bold": true,
+      "color": "#283239",
+      "anchor": "start"
+    },
+    {
+      "x": 632,
+      "y": 245,
+      "text": "Dentro de Tarifas y transbordos",
+      "size": 14,
+      "bold": true,
+      "color": "#283239",
+      "anchor": "start"
+    },
+    {
+      "x": 1216,
+      "y": 245,
+      "text": "Salidas",
+      "size": 14,
+      "bold": true,
+      "color": "#283239",
+      "anchor": "start"
+    },
+    {
+      "x": 48,
+      "y": 930,
+      "text": "C: comando · Q: consulta · E: evento. Las flechas son colaboraciones lógicas; no requieren un bus de mensajes.",
+      "size": 11,
+      "bold": false,
+      "color": "#283239",
+      "anchor": "start"
+    },
+    {
+      "x": 48,
+      "y": 951,
+      "text": "Adaptación de DDD Crew · Bounded Context Canvas v5 · CC BY 4.0 · Detalle: Analisis-V10-V11.md",
+      "size": 10,
+      "bold": false,
+      "color": "#283239",
+      "anchor": "start"
+    }
+  ],
+  "links": [
+    {
+      "points": [
+        [
+          568,
+          319
+        ],
+        [
+          632,
+          319
+        ]
+      ],
+      "type": "f",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1152,
+          319
+        ],
+        [
+          1216,
+          319
+        ]
+      ],
+      "type": "f",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          568,
+          429
+        ],
+        [
+          632,
+          429
+        ]
+      ],
+      "type": "f",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1152,
+          429
+        ],
+        [
+          1216,
+          429
+        ]
+      ],
+      "type": "f",
+      "label": null,
+      "labelpos": null
+    }
+  ]
+}

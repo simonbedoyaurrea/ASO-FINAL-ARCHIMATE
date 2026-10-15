@@ -1,0 +1,954 @@
+{
+  "width": 1800,
+  "height": 950,
+  "title": "V10 · Trazabilidad de la meta al componente",
+  "cards": [
+    {
+      "x": 48,
+      "y": 400,
+      "width": 220,
+      "height": 100,
+      "title": "G01 · Pago ágil y tarifa correcta",
+      "body": "",
+      "fill": "#ded8f4",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 350,
+      "y": 160,
+      "width": 250,
+      "height": 90,
+      "title": "R1 / D1 · Recibir los tres modos sin duplicados",
+      "body": "",
+      "fill": "#ded8f4",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 645,
+      "y": 160,
+      "width": 230,
+      "height": 90,
+      "title": "Validación y entrada",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 920,
+      "y": 160,
+      "width": 240,
+      "height": 90,
+      "title": "Recibir y registrar validaciones",
+      "body": "",
+      "fill": "#fff0c7",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1205,
+      "y": 160,
+      "width": 250,
+      "height": 90,
+      "title": "Recibir transacciones",
+      "body": "",
+      "fill": "#dceef3",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1500,
+      "y": 160,
+      "width": 250,
+      "height": 90,
+      "title": "Recepción de transacciones",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 350,
+      "y": 265,
+      "width": 250,
+      "height": 90,
+      "title": "R2 · Emitir, recargar, consultar saldo y bloquear por pérdida",
+      "body": "",
+      "fill": "#ded8f4",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 645,
+      "y": 265,
+      "width": 230,
+      "height": 90,
+      "title": "Medios de pago",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 920,
+      "y": 265,
+      "width": 240,
+      "height": 90,
+      "title": "Gestionar VAMOS",
+      "body": "",
+      "fill": "#fff0c7",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1205,
+      "y": 265,
+      "width": 250,
+      "height": 90,
+      "title": "Manejar tarjetas y saldos",
+      "body": "",
+      "fill": "#dceef3",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1500,
+      "y": 265,
+      "width": 250,
+      "height": 90,
+      "title": "Tarjetas VAMOS y saldos",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 350,
+      "y": 370,
+      "width": 250,
+      "height": 90,
+      "title": "R3 · Verificar los cuatro perfiles especiales",
+      "body": "",
+      "fill": "#ded8f4",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 645,
+      "y": 370,
+      "width": 230,
+      "height": 90,
+      "title": "Tarifas y descuentos",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 920,
+      "y": 370,
+      "width": 240,
+      "height": 90,
+      "title": "Verificar elegibilidad",
+      "body": "",
+      "fill": "#fff0c7",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1205,
+      "y": 370,
+      "width": 250,
+      "height": 90,
+      "title": "Manejar perfiles",
+      "body": "",
+      "fill": "#dceef3",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1500,
+      "y": 370,
+      "width": 250,
+      "height": 90,
+      "title": "Perfiles y descuentos",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 350,
+      "y": 475,
+      "width": 250,
+      "height": 90,
+      "title": "R3 / R4 · Aplicar tarifa e integración entre modos",
+      "body": "",
+      "fill": "#ded8f4",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 645,
+      "y": 475,
+      "width": 230,
+      "height": 90,
+      "title": "Tarifas y descuentos",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 920,
+      "y": 475,
+      "width": 240,
+      "height": 90,
+      "title": "Determinar tarifa del viaje",
+      "body": "",
+      "fill": "#fff0c7",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1205,
+      "y": 475,
+      "width": 250,
+      "height": 90,
+      "title": "Calcular la tarifa de los viajes",
+      "body": "",
+      "fill": "#dceef3",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1500,
+      "y": 475,
+      "width": 250,
+      "height": 90,
+      "title": "Tarifas y transbordos",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 350,
+      "y": 580,
+      "width": 250,
+      "height": 90,
+      "title": "R1 · Pagar con débito y crédito sin adquirir VAMOS",
+      "body": "",
+      "fill": "#ded8f4",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 645,
+      "y": 580,
+      "width": 230,
+      "height": 90,
+      "title": "Medios de pago",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 920,
+      "y": 580,
+      "width": 240,
+      "height": 90,
+      "title": "Cobrar con tarjeta bancaria",
+      "body": "",
+      "fill": "#fff0c7",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1205,
+      "y": 580,
+      "width": 250,
+      "height": 90,
+      "title": "Cobrar viajes a la tarjeta del banco",
+      "body": "",
+      "fill": "#dceef3",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1500,
+      "y": 580,
+      "width": 250,
+      "height": 90,
+      "title": "Pago con tarjeta del banco",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 350,
+      "y": 685,
+      "width": 250,
+      "height": 90,
+      "title": "R5 · Consolidar por modo, ruta y operador",
+      "body": "",
+      "fill": "#ded8f4",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 645,
+      "y": 685,
+      "width": 230,
+      "height": 90,
+      "title": "Consolidación y reparto (solo consolidar)",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 920,
+      "y": 685,
+      "width": 240,
+      "height": 90,
+      "title": "Consolidar el recaudo",
+      "body": "",
+      "fill": "#fff0c7",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1205,
+      "y": 685,
+      "width": 250,
+      "height": 90,
+      "title": "Consolidar y entregar la base",
+      "body": "",
+      "fill": "#dceef3",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 1500,
+      "y": 685,
+      "width": 250,
+      "height": 90,
+      "title": "Consolidación del recaudo",
+      "body": "",
+      "fill": "#f7dfaa",
+      "size": 14,
+      "kind": null
+    },
+    {
+      "x": 48,
+      "y": 825,
+      "width": 840,
+      "height": 90,
+      "title": "Lectura",
+      "body": "Discontinua: realiza. Continua: sirve al proceso. Las seis cadenas llegan a la misma meta; no representan pasos de ejecución.",
+      "fill": "#edf0f2",
+      "size": 12,
+      "kind": null
+    },
+    {
+      "x": 912,
+      "y": 825,
+      "width": 840,
+      "height": 90,
+      "title": "Alcance",
+      "body": "R1–R5: Tema 4. D1: no duplicar transacciones. Se consolida la base; conciliar, liquidar y pagar operadores queda fuera.",
+      "fill": "#edf0f2",
+      "size": 12,
+      "kind": null
+    }
+  ],
+  "texts": [
+    {
+      "x": 48,
+      "y": 42,
+      "text": "V10 · Trazabilidad de la meta al componente",
+      "size": 24,
+      "bold": true,
+      "color": "#283239",
+      "anchor": "start"
+    },
+    {
+      "x": 48,
+      "y": 71,
+      "text": "Tema 4 · Una meta compartida y seis componentes",
+      "size": 14,
+      "bold": false,
+      "color": "#525d64",
+      "anchor": "start"
+    },
+    {
+      "x": 48,
+      "y": 375,
+      "text": "Meta común",
+      "size": 14,
+      "bold": true,
+      "color": "#283239",
+      "anchor": "start",
+      "width": 220
+    },
+    {
+      "x": 350,
+      "y": 133,
+      "text": "Requerimiento",
+      "size": 13,
+      "bold": true,
+      "color": "#283239",
+      "anchor": "start"
+    },
+    {
+      "x": 645,
+      "y": 133,
+      "text": "Capacidad de V2",
+      "size": 13,
+      "bold": true,
+      "color": "#283239",
+      "anchor": "start"
+    },
+    {
+      "x": 920,
+      "y": 133,
+      "text": "Proceso de negocio",
+      "size": 13,
+      "bold": true,
+      "color": "#283239",
+      "anchor": "start"
+    },
+    {
+      "x": 1205,
+      "y": 133,
+      "text": "Servicio de aplicación",
+      "size": 13,
+      "bold": true,
+      "color": "#283239",
+      "anchor": "start"
+    },
+    {
+      "x": 1500,
+      "y": 133,
+      "text": "Componente de V8",
+      "size": 13,
+      "bold": true,
+      "color": "#283239",
+      "anchor": "start"
+    },
+    {
+      "x": 48,
+      "y": 935,
+      "text": "Capacidades de V2 y componentes de V8 reutilizados. El detalle de resultados y decisiones permanece documentado.",
+      "size": 11,
+      "bold": false,
+      "color": "#283239",
+      "anchor": "start"
+    }
+  ],
+  "links": [
+    {
+      "points": [
+        [
+          350,
+          205
+        ],
+        [
+          320,
+          205
+        ],
+        [
+          285,
+          450
+        ],
+        [
+          268,
+          450
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          645,
+          205
+        ],
+        [
+          600,
+          205
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          920,
+          205
+        ],
+        [
+          875,
+          205
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1205,
+          205
+        ],
+        [
+          1160,
+          205
+        ]
+      ],
+      "type": "s",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1500,
+          205
+        ],
+        [
+          1455,
+          205
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          350,
+          310
+        ],
+        [
+          320,
+          310
+        ],
+        [
+          285,
+          450
+        ],
+        [
+          268,
+          450
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          645,
+          310
+        ],
+        [
+          600,
+          310
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          920,
+          310
+        ],
+        [
+          875,
+          310
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1205,
+          310
+        ],
+        [
+          1160,
+          310
+        ]
+      ],
+      "type": "s",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1500,
+          310
+        ],
+        [
+          1455,
+          310
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          350,
+          415
+        ],
+        [
+          320,
+          415
+        ],
+        [
+          285,
+          450
+        ],
+        [
+          268,
+          450
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          645,
+          415
+        ],
+        [
+          600,
+          415
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          920,
+          415
+        ],
+        [
+          875,
+          415
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1205,
+          415
+        ],
+        [
+          1160,
+          415
+        ]
+      ],
+      "type": "s",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1500,
+          415
+        ],
+        [
+          1455,
+          415
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          350,
+          520
+        ],
+        [
+          320,
+          520
+        ],
+        [
+          285,
+          450
+        ],
+        [
+          268,
+          450
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          645,
+          520
+        ],
+        [
+          600,
+          520
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          920,
+          520
+        ],
+        [
+          875,
+          520
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1205,
+          520
+        ],
+        [
+          1160,
+          520
+        ]
+      ],
+      "type": "s",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1500,
+          520
+        ],
+        [
+          1455,
+          520
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          350,
+          625
+        ],
+        [
+          320,
+          625
+        ],
+        [
+          285,
+          450
+        ],
+        [
+          268,
+          450
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          645,
+          625
+        ],
+        [
+          600,
+          625
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          920,
+          625
+        ],
+        [
+          875,
+          625
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1205,
+          625
+        ],
+        [
+          1160,
+          625
+        ]
+      ],
+      "type": "s",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1500,
+          625
+        ],
+        [
+          1455,
+          625
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          350,
+          730
+        ],
+        [
+          320,
+          730
+        ],
+        [
+          285,
+          450
+        ],
+        [
+          268,
+          450
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          645,
+          730
+        ],
+        [
+          600,
+          730
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          920,
+          730
+        ],
+        [
+          875,
+          730
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1205,
+          730
+        ],
+        [
+          1160,
+          730
+        ]
+      ],
+      "type": "s",
+      "label": null,
+      "labelpos": null
+    },
+    {
+      "points": [
+        [
+          1500,
+          730
+        ],
+        [
+          1455,
+          730
+        ]
+      ],
+      "type": "r",
+      "label": null,
+      "labelpos": null
+    }
+  ]
+}

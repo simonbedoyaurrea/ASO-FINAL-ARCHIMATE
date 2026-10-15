@@ -16,3 +16,25 @@ Thumbs.db
 /Proyecto_Diseño_Arquitectura_ArchiMate.docx
 
 # Modelos y exportaciones locales deben revisarse manualmente antes de añadirlos
+
+# Archi, LibreOffice y Python: archivos locales, nunca parte de la entrega
+.~lock.*#
+__pycache__/
+*.pyc
+/modelo/*-qa*.xml
+/modelo/*-mcp-preview.svg
+/Bocetos/*-archi-mcp.png
+/Bocetos/*-mcp-prueba.*
+/Bocetos/V10-V11-integracion.json
+/Bocetos/V10-V11-verificacion.json
+/Bocetos/V10-cobertura.json
+
+# Iteraciones descartadas de presentación (las vigentes se versionan explícitamente)
+/Bocetos/V8-boceto-01.*
+/Bocetos/V8-boceto-02.*
+/Bocetos/V8-boceto-03.*
+/Bocetos/V10-boceto-01.*
+/Bocetos/V10-boceto-02.*
+/Bocetos/V11-boceto-01.*
+/Bocetos/V11-boceto-02.*
+/Bocetos/V11-boceto-03.*
